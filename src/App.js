@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.scss';
+import NavBarHeader from './features/NavBarHeader';
 
 function App() {
   return (
     <div className="App">
-      Hell i'm building the Movie Database app
+      <NavBarHeader />
     </div>
   );
 }
