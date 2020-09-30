@@ -11,26 +11,26 @@ import logo from "../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5d
 import TableList from "../../components/TableList";
 
 const movieDropdown = [
-  { title: "Popular", link: "" },
-  { title: "Now Playing", link: "" },
-  { title: "Upcoming", link: "" },
-  { title: "Top Rated", link: "" },
+  { title: "Popular", link: "/movies/popular" },
+  { title: "Now Playing", link: "/moives/now-playing" },
+  { title: "Upcoming", link: "/moives/upcoming" },
+  { title: "Top Rated", link: "/moives/top-rated" },
 ];
 
 const tvShowsDropdown = [
-  { title: "Popular", link: "" },
-  { title: "Airing Today", link: "" },
-  { title: "On TV", link: "" },
-  { title: "Top Rated", link: "" },
+  { title: "Popular", link: "/tv-shows/popular" },
+  { title: "Airing Today", link: "/tv-shows/airing-today" },
+  { title: "On TV", link: "/tv-shows/on-tv" },
+  { title: "Top Rated", link: "/tv-shows/top-rated" },
 ];
 
-const peopleDropdown = [{ title: "Popular People", link: "" }];
+const peopleDropdown = [{ title: "Popular People", link: "/people/popular-people" }];
 
 const moreDropdown = [
-  { title: "Discussions", link: "" },
-  { title: "Leader Board", link: "" },
-  { title: "Support", link: "" },
-  { title: "Api", link: "" },
+  { title: "Discussions", link: "/more/discussions" },
+  { title: "Leader Board", link: "/more/leader-board" },
+  { title: "Support", link: "/more/support" },
+  { title: "Api", link: "/more/api" },
 ];
 
 export default function NavBarHeader() {
@@ -56,7 +56,7 @@ export default function NavBarHeader() {
                 <Typography className="navbar-header__menu-item-title">
                   Movies
                 </Typography>
-                {active == "movieDropdown" && (
+                {active === "movieDropdown" && (
                   <div className="navbar-header__menu-item--dropdown">
                     <TableList list={movieDropdown} />
                   </div>

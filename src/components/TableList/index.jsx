@@ -13,11 +13,19 @@ TableList.defaultProps = {
 
 export default function TableList(props) {
   const history = useHistory();
+  
   return (
     <div className="table-list">
       {props.list.map((item, index) => {
         return (
-          <div key={index} className="table-list__item">
+          <div
+            key={index}
+            className="table-list__item"
+            onClick={() => {
+              history.push(item.link);
+              console.log(item.link)
+            }}
+          >
             <Typography
               color="textPrimary"
               variant="subtitle1"
