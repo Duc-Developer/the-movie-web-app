@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css");
+
 
 @import "./assets/styles/variables";
 @import "./assets//styles/mixins";
@@ -10,6 +13,7 @@
 @import "./assets/styles/table-list";
 @import "./assets/styles/home-page";
 @import "./assets/styles/movie-card";
+@import "./assets/styles/slider-slick-movie";
 
 .App {
     font-family: $roboto-font;

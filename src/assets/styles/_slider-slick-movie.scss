@@ -1,0 +1,19 @@
+.slider-slick-movie {
+    margin-left: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    &__switch {
+      flex-grow: 1;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1em;
+    }
+
+    &__switch {
+      padding-left: 1em;
+    }
+}
