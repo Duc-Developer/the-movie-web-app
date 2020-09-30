@@ -29,12 +29,12 @@ MovieCard.propType = {
 };
 
 MovieCard.defaultProps = {
-  type: "movie",
+  type: "",
   image: "/dzOxNbbz1liFzHU1IPvdgUR647b.jpg",
-  originalName: "The Boys",
-  id: 76479,
-  voteAverage: 8.4,
-  name: "Siêu Anh Hùng Phá Hoại",
+  originalName: "something was wrong",
+  id: 111111111,
+  voteAverage: 0,
+  name: "something was wrong",
   firstAirDate: "2019-07-25",
 };
 

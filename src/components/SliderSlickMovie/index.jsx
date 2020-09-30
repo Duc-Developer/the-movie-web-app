@@ -90,7 +90,7 @@ export default function SliderSlickMovie(props) {
               return (
                 <div key={item.id}>
                   <MovieCard
-                    name={item.name}
+                    name={!item.name ? item.title : item.name}
                     id={item.id}
                     type={type}
                     image={item.poster_path}

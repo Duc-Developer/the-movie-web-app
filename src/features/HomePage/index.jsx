@@ -2,6 +2,7 @@ import { Button, InputBase } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SliderSlickMovie from "../../components/SliderSlickMovie";
+import MovieCard from "../../components/MovieCard";
 
 const settings = {
   dots: false,
