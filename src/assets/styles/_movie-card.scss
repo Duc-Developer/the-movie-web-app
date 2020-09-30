@@ -1,0 +1,84 @@
+.movie-card {
+  .MuiPaper-elevation1 {
+    box-shadow: none;
+  }
+
+  &__little-menu {
+    width: 8em;
+    height: 10em;
+    position: absolute;
+    top: 3em;
+    right: 1px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #aaaaaa;
+    padding: 0.5em 0 0.5em 0;
+
+    .MuiButtonBase-root {
+      justify-content: flex-start;
+      width: 100%;
+      padding: 0.5em 0 0.5em 0;
+
+      &:hover {
+        background-color: #aaaaaa;
+      }
+    }
+
+    span {
+      font-size: 1.2em;
+    }
+  }
+
+  &__wrapper {
+    width: 150px;
+    height: 300px;
+    position: relative;
+  }
+
+  &__header {
+    position: absolute;
+    right: 0;
+
+    &-icon {
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.5;
+
+      &:hover {
+        background-color: aqua;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__media {
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
+    cursor: pointer; 
+  }
+
+  &__content {
+    height: 20%;
+    width: 90%;
+    position: relative !important;
+  }
+
+  &__vote-average {
+    position: absolute;
+    top: -1.5em;
+
+    .MuiCircularProgress-root {
+      background-color: $primary-color;
+      border-radius: 50%;
+    }
+
+    .MuiCircularProgress-colorPrimary {
+      color: rgb(66, 175, 66);
+    }
+
+    .MuiTypography-colorTextPrimary {
+      color: white;
+    }
+  }
+}

@@ -7,7 +7,7 @@ export default function Moives() {
     return (
         <div>
             <Switch>
-                <Route></Route>
+                <Route exact path={`${match.url}`}></Route>
             </Switch>
         </div>
     )

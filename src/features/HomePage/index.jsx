@@ -1,5 +1,6 @@
 import { Button, InputBase } from "@material-ui/core";
 import React from "react";
+import MovieCard from "../../components/MovieCard";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,9 @@ export default function HomePage() {
             <Button>Search</Button>
           </div>
         </div>
+      </div>
+      <div className="home-page__body">
+          <MovieCard />
       </div>
     </div>
   );

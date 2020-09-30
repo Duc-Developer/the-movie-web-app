@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 TableList.propTypes = {
   list: PropTypes.array,
+  width: PropTypes.string,
 };
 
 TableList.defaultProps = {
@@ -13,9 +14,9 @@ TableList.defaultProps = {
 
 export default function TableList(props) {
   const history = useHistory();
-  
+
   return (
-    <div className="table-list">
+    <div style={{ width: props.width }} className="table-list">
       {props.list.map((item, index) => {
         return (
           <div
@@ -23,7 +24,6 @@ export default function TableList(props) {
             className="table-list__item"
             onClick={() => {
               history.push(item.link);
-              console.log(item.link)
             }}
           >
             <Typography
