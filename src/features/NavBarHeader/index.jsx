@@ -12,6 +12,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import logo from "../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import TableList from "../../components/TableList";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
 const movieDropdown = [
   { title: "Popular", link: "/movies/popular" },
@@ -56,13 +57,19 @@ HideOnScroll.propTypes = {
 
 export default function NavBarHeader(props) {
   const [active, setActive] = useState(false);
+  const history = useHistory();
   return (
     <div className="navbar-header">
       <Container>
         <HideOnScroll {...props}>
           <AppBar>
             <Toolbar>
-              <IconButton className="navbar-header__logo">
+              <IconButton
+                onClick={() => {
+                  history.push("/");
+                }}
+                className="navbar-header__logo"
+              >
                 <img src={logo} alt="logo-app" />
               </IconButton>
               <div className="navbar-header__menu">
