@@ -125,7 +125,7 @@ export default function HomePage() {
         />
       </div>
       <div>
-        <img src={screenshotImg} alt="screen-shot-img"/>
+        <img id="screen-shot-image-home" src={screenshotImg} alt="screen-shot-img"/>
       </div>
     </div>
   );
