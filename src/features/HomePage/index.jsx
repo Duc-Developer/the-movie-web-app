@@ -2,7 +2,7 @@ import { Button, InputBase } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SliderSlickMovie from "../../components/SliderSlickMovie";
-import MovieCard from "../../components/MovieCard";
+import screenshotImg from "../../assets/images/Screenshot from 2020-10-01 21-02-16.jpg";
 
 const settings = {
   dots: false,
@@ -123,6 +123,9 @@ export default function HomePage() {
           dataType1="today"
           dataType2="this week"
         />
+      </div>
+      <div>
+        <img src={screenshotImg} alt="screen-shot-img"/>
       </div>
     </div>
   );
