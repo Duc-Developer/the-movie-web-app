@@ -9,6 +9,7 @@ import {
 import NotFound from './components/NotFound';
 import Loading from './components/Loading';
 import HomePage from './features/HomePage';
+import Footer from './components/Footer';
 
 const Moives = React.lazy(() => import("./features/Movies"));
 
@@ -31,6 +32,8 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
+
+        <Footer />
       </Router>
       </Suspense>
     </div>
