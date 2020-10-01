@@ -1,4 +1,6 @@
 .movie-card {
+  position: relative;
+  
   .MuiPaper-elevation1 {
     box-shadow: none;
   }
@@ -7,8 +9,8 @@
     width: 8em;
     height: 10em;
     position: absolute;
-    top: 3em;
-    right: 1px;
+    top: 2.5em;
+    right: 0;
     background-color: white;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #aaaaaa;

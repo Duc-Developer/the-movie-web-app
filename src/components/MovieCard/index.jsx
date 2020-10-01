@@ -96,26 +96,6 @@ export default function MovieCard(props) {
             <MoreHorizIcon className="movie-card__header-icon" />
           </IconButton>
         </div>
-        {active && (
-          <div className="movie-card__little-menu">
-            <ButtonBase>
-              <ListIcon />
-              <span> Add To List</span>
-            </ButtonBase>
-            <ButtonBase>
-              <FavoriteIcon />
-              <span> Favorite</span>
-            </ButtonBase>
-            <ButtonBase className="movie-card__little-menu-base">
-              <BookmarkIcon />
-              <span> Watchlist</span>
-            </ButtonBase>
-            <ButtonBase>
-              <StarIcon />
-              <span> Your rating</span>
-            </ButtonBase>
-          </div>
-        )}
         <CardMedia
           className="movie-card__media"
           image={path.images + image}
@@ -132,6 +112,26 @@ export default function MovieCard(props) {
           <Typography>{firstAirDate}</Typography>
         </CardContent>
       </Card>
+      {active && (
+        <div className="movie-card__little-menu">
+          <ButtonBase>
+            <ListIcon />
+            <span> Add To List</span>
+          </ButtonBase>
+          <ButtonBase>
+            <FavoriteIcon />
+            <span> Favorite</span>
+          </ButtonBase>
+          <ButtonBase className="movie-card__little-menu-base">
+            <BookmarkIcon />
+            <span> Watchlist</span>
+          </ButtonBase>
+          <ButtonBase>
+            <StarIcon />
+            <span> Your rating</span>
+          </ButtonBase>
+        </div>
+      )}
     </div>
   );
 }
