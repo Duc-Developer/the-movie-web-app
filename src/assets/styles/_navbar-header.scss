@@ -16,15 +16,7 @@
   &__menu--desktop-screen {
     flex-grow: 1;
   }
-
-  &__search-bar {
-    .MuiIconButton-root {
-      color: $secondary-color;
-    }
-    .MuiSvgIcon-root {
-      font-size: 1.5em;
-    }
-  }
+  
 }
 
 @media only screen and (max-width: 767px) {

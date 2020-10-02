@@ -8,9 +8,7 @@ import {
   useScrollTrigger,
   Slide,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
 import logo from "../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
-import TableList from "../../components/TableList";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
@@ -124,11 +122,6 @@ export default function NavBarHeader(props) {
                 <Typography>
                   Login
                 </Typography>
-              </div>
-              <div className="navbar-header__search-bar">
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
               </div>
             </Toolbar>
           </AppBar>
