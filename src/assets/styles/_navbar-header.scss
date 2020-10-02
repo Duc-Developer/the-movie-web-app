@@ -1,37 +1,46 @@
 .navbar-header {
+  .MuiAppBar-colorPrimary {
+    background-color: $primary-color;
+  }
 
-    .MuiAppBar-colorPrimary {
-        background-color: $primary-color;
+  &__logo {
+    img {
+      width: 7em;
     }
+  }
 
+  &__menu--mobile-screen {
+    display: none;
+  }
+
+  &__menu--desktop-screen {
+    flex-grow: 1;
+  }
+
+  &__search-bar {
+    .MuiIconButton-root {
+      color: $secondary-color;
+    }
+    .MuiSvgIcon-root {
+      font-size: 1.5em;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .navbar-header {
     &__logo {
-        img {
-            width: 7em;
-        }
+      img {
+        display: none;
+      }
     }
 
-    &__menu {
-        @include flexCenter(row);
-        justify-content: flex-start;
-        flex-grow: 1;
-
-        &-item {
-            padding: 1em;
-            cursor: pointer;
-            position: relative !important;
-            
-            &-title:hover {
-                opacity: 0.8;
-            }
-
-            &--dropdown {
-                position: absolute;
-                top: 3em;
-            }
-        }
+    &__menu--desktop-screen {
+      display: none;
     }
 
-    &__search-icon {
-        color: $secondary-color;
-    }
+    &__menu--mobile-screen {
+        display: block;
+      }
+  }
 }

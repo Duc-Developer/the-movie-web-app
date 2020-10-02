@@ -1,0 +1,8 @@
+.nav-menu-desktop {
+    @include flexCenter(row);
+    justify-content: flex-start;
+
+    &__item {
+        margin: 0 0.5em 0 0.5em;
+    }
+}

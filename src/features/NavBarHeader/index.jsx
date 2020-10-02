@@ -13,31 +13,48 @@ import logo from "../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5d
 import TableList from "../../components/TableList";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
+import ReorderIcon from "@material-ui/icons/Reorder";
+import NavMenuDesktop from "./NavMenuDesktop";
+import NavMenuMobile from "./NavMenuMobile";
 
-const movieDropdown = [
-  { title: "Popular", link: "/movies/popular" },
-  { title: "Now Playing", link: "/moives/now-playing" },
-  { title: "Upcoming", link: "/moives/upcoming" },
-  { title: "Top Rated", link: "/moives/top-rated" },
-];
+const movieDropdown = {
+  id: "movie-dropdown-id",
+  name: "Movies",
+  listItem: [
+    { name: "Popular", path: "/movies/popular" },
+    { name: "Now Playing", path: "/moives/now-playing" },
+    { name: "Upcoming", path: "/moives/upcoming" },
+    { name: "Top Rated", path: "/moives/top-rated" },
+  ],
+};
 
-const tvShowsDropdown = [
-  { title: "Popular", link: "/tv-shows/popular" },
-  { title: "Airing Today", link: "/tv-shows/airing-today" },
-  { title: "On TV", link: "/tv-shows/on-tv" },
-  { title: "Top Rated", link: "/tv-shows/top-rated" },
-];
+const tvShowsDropdown = {
+  id: "tv-shows-dropdown-id",
+  name: "TV Shows",
+  listItem: [
+    { name: "Popular", path: "/tv-shows/popular" },
+    { name: "Airing Today", path: "/tv-shows/airing-today" },
+    { name: "On TV", path: "/tv-shows/on-tv" },
+    { name: "Top Rated", path: "/tv-shows/top-rated" },
+  ],
+};
 
-const peopleDropdown = [
-  { title: "Popular People", link: "/people/popular-people" },
-];
+const peopleDropdown = {
+  id: "people-dropdown-id",
+  name: "People",
+  listItem: [{ name: "Popular People", path: "/people/popular-people" }],
+};
 
-const moreDropdown = [
-  { title: "Discussions", link: "/more/discussions" },
-  { title: "Leader Board", link: "/more/leader-board" },
-  { title: "Support", link: "/more/support" },
-  { title: "Api", link: "/more/api" },
-];
+const moreDropdown = {
+  id: "more-dropdown-id",
+  name: "More",
+  listItem: [
+    { name: "Discussions", path: "/more/discussions" },
+    { name: "Leader Board", path: "/more/leader-board" },
+    { name: "Support", path: "/more/support" },
+    { name: "Api", path: "/more/api" },
+  ],
+};
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -58,6 +75,17 @@ HideOnScroll.propTypes = {
 export default function NavBarHeader(props) {
   const [active, setActive] = useState(false);
   const history = useHistory();
+
+  const navBarMobile = () => {
+    return (
+      <div className="navbar-header__menu--mobile-screen">
+        <IconButton>
+          <ReorderIcon />
+        </IconButton>
+      </div>
+    );
+  };
+
   return (
     <div className="navbar-header">
       <Container>
@@ -72,87 +100,36 @@ export default function NavBarHeader(props) {
               >
                 <img src={logo} alt="logo-app" />
               </IconButton>
-              <div className="navbar-header__menu">
-                <div
-                  onMouseMove={() => {
-                    setActive("movieDropdown");
-                  }}
-                  onMouseLeave={() => {
-                    setActive(false);
-                  }}
-                  className="navbar-header__menu-item"
-                >
-                  <Typography className="navbar-header__menu-item-title">
-                    Movies
-                  </Typography>
-                  {active === "movieDropdown" && (
-                    <div className="navbar-header__menu-item--dropdown">
-                      <TableList list={movieDropdown} />
-                    </div>
-                  )}
-                </div>
-                <div
-                  onMouseMove={() => {
-                    setActive("tvShowsDropdown");
-                  }}
-                  onMouseLeave={() => {
-                    setActive(false);
-                  }}
-                  className="navbar-header__menu-item"
-                >
-                  <Typography className="navbar-header__menu-item-title">
-                    TVShows
-                  </Typography>
-                  {active === "tvShowsDropdown" && (
-                    <div className="navbar-header__menu-item--dropdown">
-                      <TableList list={tvShowsDropdown} />
-                    </div>
-                  )}
-                </div>
-                <div
-                  onMouseMove={() => {
-                    setActive("peopleDropdown");
-                  }}
-                  onMouseLeave={() => {
-                    setActive(false);
-                  }}
-                  className="navbar-header__menu-item"
-                >
-                  <Typography className="navbar-header__menu-item-title">
-                    People
-                  </Typography>
-                  {active === "peopleDropdown" && (
-                    <div className="navbar-header__menu-item--dropdown">
-                      <TableList list={peopleDropdown} />
-                    </div>
-                  )}
-                </div>
-                <div
-                  onMouseMove={() => {
-                    setActive("moreDropdown");
-                  }}
-                  onMouseLeave={() => {
-                    setActive(false);
-                  }}
-                  className="navbar-header__menu-item"
-                >
-                  <Typography className="navbar-header__menu-item-title">
-                    More
-                  </Typography>
-                  {active === "moreDropdown" && (
-                    <div className="navbar-header__menu-item--dropdown">
-                      <TableList list={moreDropdown} />
-                    </div>
-                  )}
-                </div>
-              </div>
-              <Typography>Login</Typography>
-              <IconButton>
-                <SearchIcon
-                  fontSize="large"
-                  className="navbar-header__search-icon"
+              <div className="navbar-header__menu--desktop-screen">
+                <NavMenuDesktop
+                  menuList={[
+                    movieDropdown,
+                    tvShowsDropdown,
+                    peopleDropdown,
+                    moreDropdown,
+                  ]}
                 />
-              </IconButton>
+              </div>
+              <div className="navbar-header__menu--mobile-screen">
+                <NavMenuMobile 
+                menuList={[
+                  movieDropdown,
+                  tvShowsDropdown,
+                  peopleDropdown,
+                  moreDropdown,
+                ]}
+                />
+              </div>
+              <div>
+                <Typography>
+                  Login
+                </Typography>
+              </div>
+              <div className="navbar-header__search-bar">
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              </div>
             </Toolbar>
           </AppBar>
         </HideOnScroll>
