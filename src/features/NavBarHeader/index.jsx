@@ -71,7 +71,6 @@ HideOnScroll.propTypes = {
 };
 
 export default function NavBarHeader(props) {
-  const [active, setActive] = useState(false);
   const history = useHistory();
 
   const navBarMobile = () => {

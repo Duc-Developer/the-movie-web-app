@@ -7,14 +7,14 @@ export default function Footer() {
     <div className="footer">
       <Container>
         <Grid container>
-        <Grid container item sm={12} lg={4}>
+        <Grid container alignContent="center" item xs={12} lg={4}>
           <img src={logo} alt="log-footer" width="150px" />
           <div style={{ marginTop: "1em" }}>
             <span className="footer__welcome">Welcome to my Page</span>
           </div>
         </Grid>
-        <Grid container item sm={12} lg={8}>
-        <Grid item lg={3} sm={12}>
+        <Grid container alignContent="center" item xs={12} lg={8}>
+        <Grid item lg={3} xs={12}>
           <ol className="footer__list">
             <li>THE BASICS</li>
             <li>Giới thiệu về TMDb</li>
@@ -23,7 +23,7 @@ export default function Footer() {
             <li>System Status</li>
           </ol>
         </Grid>
-        <Grid item lg={3} sm={12}>
+        <Grid item lg={3} xs={12}>
           <ol className="footer__list">
             <li>GET INVOLVED</li>
             <li>Contribution Bible</li>
@@ -32,7 +32,7 @@ export default function Footer() {
             <li>Add New TV Show</li>
           </ol>
         </Grid>
-        <Grid item lg={3} sm={12}>
+        <Grid item lg={3} xs={12}>
           <ol className="footer__list">
             <li>COMMUNITY</li>
             <li>Guidelines</li>
@@ -41,7 +41,7 @@ export default function Footer() {
             <li>Twitter</li>
           </ol>
         </Grid>
-        <Grid item lg={3} sm={12}>
+        <Grid item lg={3} xs={12}>
           <ol className="footer__list">
             <li>LEGAL</li>
             <li>Terms of Use</li>
