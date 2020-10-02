@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { Button, ButtonGroup, Typography } from "@material-ui/core";
+import { Button, ButtonGroup, Grid, Typography } from "@material-ui/core";
 import Slider from "react-slick";
 import MovieCard from "../MovieCard";
 
@@ -14,7 +14,6 @@ SliderSlickMovie.propTypes = {
 };
 
 SliderSlickMovie.defaultProps = {
-  slideNumber: 7,
   title: "example",
   dataType1: "tv",
   dataType2: "movie",
@@ -26,20 +25,38 @@ export default function SliderSlickMovie(props) {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: props.slideNumber,
+    slidesToShow: sliderNumberCurrent(),
     slidesToScroll: 1,
     easing: "ease-in-out",
   };
-
   const sliderRef = useRef(null);
   const { data, title, dataType1, dataType2, handleType } = props;
   const [type, setType] = useState(dataType1);
+
+  function sliderNumberCurrent() {
+    let screen = window.screen.width;
+    if (screen <= 425) {
+      return 2;
+    }
+    if (screen > 425 && screen <= 1024) {
+      return 5;
+    }
+    if (screen > 1024 && screen <= 1440) {
+      return 7;
+    }
+    if (screen > 1140) {
+      return 8;
+    }
+  }
+
   return (
     <div className="slider-slick-movie">
-      <div className="slider-slick-movie__header">
-        <Typography variant="h5">{title}</Typography>
-        <div className="slider-slick-movie__switch">
-          <ButtonGroup color="primary">
+      <Grid container className="slider-slick-movie__header">
+        <Grid item lg={2}sm={3} xs={12} className="slider-slick-movie__header-left">
+          <Typography variant="h5">{title}</Typography>
+        </Grid>
+        <Grid item lg={10}sm={9} xs={12} className="slider-slick-movie__header-right">
+          <ButtonGroup color="primary" className="slider-slick-movie__switcher">
             <Button
               onClick={() => {
                 setType(dataType1);
@@ -59,26 +76,26 @@ export default function SliderSlickMovie(props) {
               {dataType2.toUpperCase()}
             </Button>
           </ButtonGroup>
-        </div>
-        {data && (
-          <ButtonGroup variant="text" color="primary">
-            <Button
-              onClick={() => {
-                sliderRef.current.slickPrev();
-              }}
-            >
-              Previous
-            </Button>
-            <Button
-              onClick={() => {
-                sliderRef.current.slickNext();
-              }}
-            >
-              Next
-            </Button>
-          </ButtonGroup>
-        )}
-      </div>
+          {data && (
+            <ButtonGroup variant="text" color="primary" className="slider-slick-movie__actions">
+              <Button
+                onClick={() => {
+                  sliderRef.current.slickPrev();
+                }}
+              >
+                Previous
+              </Button>
+              <Button
+                onClick={() => {
+                  sliderRef.current.slickNext();
+                }}
+              >
+                Next
+              </Button>
+            </ButtonGroup>
+          )}
+        </Grid>
+      </Grid>
       <div>
         {!data ? (
           <Typography variant="h6">
