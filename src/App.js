@@ -11,30 +11,28 @@ import Loading from './components/Loading';
 import HomePage from './features/HomePage';
 import Footer from './components/Footer';
 
-const Moives = React.lazy(() => import("./features/Movies"));
+const Movies = React.lazy(() => import("./features/Movies"));
 
 function App() {
   return (
     <div className="App">
       <Suspense fallback={<Loading />}>
-      <Router>
-        <NavBarHeader />
+        <Router>
+          <NavBarHeader />
 
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route exact path="/movies">
-            <Moives />
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path="/movies" component={Movies}/>
+  
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
 
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-
-        <Footer />
-      </Router>
+          <Footer />
+        </Router>
       </Suspense>
     </div>
   );

@@ -71,6 +71,8 @@ export default function MovieCard(props) {
     name,
     firstAirDate,
     originalName,
+    width, 
+    height,
   } = props;
   const history = useHistory();
   const [active, setActive] = useState(false);
@@ -78,8 +80,8 @@ export default function MovieCard(props) {
     <div className="movie-card">
       <Card
         style={{
-          width: props.width,
-          height: props.height,
+          width: width,
+          height: height,
         }}
         className="movie-card__wrapper"
       >
