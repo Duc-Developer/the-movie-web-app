@@ -1,6 +1,6 @@
 import { Container } from "@material-ui/core";
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import NowPlayingPage from "./pages/NowPlayingPage";
 import PopularPage from "./pages/PopularPage";
 import TopRatedPage from "./pages/TopRatedPage";
