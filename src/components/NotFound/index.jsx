@@ -1,10 +1,14 @@
 import React from 'react';
+import NotFoundImage from '../../assets/images/404-error-page-templates.jpg';
 
 export default function NotFound() {
     return (
         <div>
-            Oops! We can't find the page you're looking for
-            You tried to request a page that doesn't exist.
+            <img 
+            src={NotFoundImage} 
+            alt="not-found-background-image"
+            width="100%"
+            />
         </div>
     )
 }
