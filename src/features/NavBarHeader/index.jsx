@@ -20,9 +20,9 @@ const movieDropdown = {
   name: "Movies",
   listItem: [
     { name: "Popular", path: "/movies/popular" },
-    { name: "Now Playing", path: "/moives/now-playing" },
-    { name: "Upcoming", path: "/moives/upcoming" },
-    { name: "Top Rated", path: "/moives/top-rated" },
+    { name: "Now Playing", path: "/movies/now-playing" },
+    { name: "Upcoming", path: "/movies/upcoming" },
+    { name: "Top Rated", path: "/movies/top-rated" },
   ],
 };
 
