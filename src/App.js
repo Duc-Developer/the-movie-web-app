@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 
 const Movies = React.lazy(() => import("./features/Movies"));
 const TvShows = React.lazy(() => import("./features/TvShows"));
+const Peoples = React.lazy(() => import("./features/Peoples"));
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             </Route>
             <Route path="/movies" component={Movies}/>
             <Route path="/tv-shows" component={TvShows}/>
+            <Route path="/peoples" component={Peoples}/>
   
             <Route>
               <NotFound />

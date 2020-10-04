@@ -40,7 +40,7 @@ const tvShowsDropdown = {
 const peopleDropdown = {
   id: "people-dropdown-id",
   name: "People",
-  listItem: [{ name: "Popular People", path: "/people/popular-people" }],
+  listItem: [{ name: "Popular People", path: "/peoples/popular-peoples" }],
 };
 
 const moreDropdown = {
