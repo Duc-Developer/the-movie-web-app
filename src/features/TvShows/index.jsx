@@ -6,7 +6,6 @@ import TopRatedPage from "./pages/TopRatedPage";
 import PopularPage from "./pages/PopularPage";
 import OnTvPage from "./pages/OnTvPage";
 
-
 export default function TvShows() {
   return (
     <div style={{ paddingTop: "5em" }}>
@@ -17,13 +16,13 @@ export default function TvShows() {
             <PopularPage />
           </Route>
           <Route exact path="/tv-shows/airing-today">
-            <OnTvPage />
+            <AiringTodayPage />
           </Route>
           <Route exact path="/tv-shows/top-rated">
             <TopRatedPage />
           </Route>
           <Route exact path="/tv-shows/on-tv">
-            <AiringTodayPage />
+            <OnTvPage />
           </Route>
         </Switch>
       </Container>
