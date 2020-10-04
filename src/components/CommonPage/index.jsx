@@ -22,7 +22,7 @@ export default function CommonPage(props) {
           {listData &&
             listData.map((movie) => {
               return (
-                <Grid item key={movie.id} xs={12} lg={3}>
+                <Grid item key={movie.id} xs={12} sm={4} md={3}>
                   <MovieCard
                     id={movie.id}
                     image={movie.poster_path}

@@ -1,0 +1,11 @@
+.people-card {
+  &__wrapper {
+    width: 20em;
+  }
+
+  &__media {
+    height: 10em;
+    padding-top: 56.25%;
+    cursor: pointer;
+  }
+}
