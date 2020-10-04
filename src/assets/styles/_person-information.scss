@@ -1,0 +1,14 @@
+.person-information {
+    overflow: hidden;
+    border-radius: 5px;
+    &__wrapper {
+      width: 20em;
+    }
+  
+    &__media {
+      height: 10em;
+      padding-top: 100%;
+      cursor: pointer;
+    }
+  }
+  
