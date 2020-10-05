@@ -1,6 +1,7 @@
 import { Container } from "@material-ui/core";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import MoviePreview from "./pages/MoviePreview";
 import NowPlayingPage from "./pages/NowPlayingPage";
 import PopularPage from "./pages/PopularPage";
 import TopRatedPage from "./pages/TopRatedPage";
@@ -23,6 +24,9 @@ export default function Movies() {
           </Route>
           <Route exact path="/movies/upcoming">
             <UpcomingPage />
+          </Route>
+          <Route exact path="/movies/:id">
+            <MoviePreview />
           </Route>
         </Switch>
       </Container>
