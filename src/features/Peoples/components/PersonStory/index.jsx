@@ -15,12 +15,14 @@ import SliderSlickMovie from "../../../../components/SliderSlickMovie";
 PersonStory.propTypes = {
   translations: PropTypes.array,
   name: PropTypes.string,
-  cast: PropTypes.array,
+  movieCast: PropTypes.array,
+  tvCast: PropTypes.array,
 };
 
 export default function PersonStory(props) {
   const [languageCurrent, setLanguage] = React.useState("en");
-  const { translations, name, cast } = props;
+  const { translations, name, movieCast, tvCast } = props;
+  const [cast, setCast] = React.useState(tvCast);
   const [showAll, setShowAll] = React.useState(false);
   const biographys = translations.filter(
     (item) => item.english_name === languageCurrent
@@ -39,6 +41,18 @@ export default function PersonStory(props) {
     }
     if (screen > 1140) {
       return 6;
+    }
+  }
+
+  function handleType(type, title) {
+    // console.log(type, title)
+    if (type === "movie") {
+      setCast(movieCast);
+      return;
+    }
+    if (type === "tv") {
+      setCast(tvCast);
+      return;
     }
   }
 
@@ -93,7 +107,10 @@ export default function PersonStory(props) {
               data={cast}
               title="Known For:"
               slideNumber={sliderNumberCurrent()}
-              switchDisabled
+              // switchDisabled
+              handleType={(type, title) => {
+                handleType(type, title);
+              }}
             />
           )}
         </Grid>

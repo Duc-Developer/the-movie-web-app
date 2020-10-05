@@ -103,7 +103,7 @@ export default function MovieCard(props) {
           image={path.images + image}
           title={originalName}
           onClick={() => {
-            history.push(`${type}/${id}`);
+            history.push(`/${type}/${id}`);
           }}
         />
         <CardContent className="movie-card__content">
