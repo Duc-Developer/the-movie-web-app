@@ -69,18 +69,5 @@
   &__vote-average {
     position: absolute;
     top: -1.5em;
-
-    .MuiCircularProgress-root {
-      background-color: $primary-color;
-      border-radius: 50%;
-    }
-
-    .MuiCircularProgress-colorPrimary {
-      color: rgb(66, 175, 66);
-    }
-
-    .MuiTypography-colorTextPrimary {
-      color: white;
-    }
   }
 }
