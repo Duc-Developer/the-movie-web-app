@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { moivesDbConstants as path } from "../../../../constants";
+import MoviePosterLibrary from "../../../../components/MoviePosterLibrary";
 
 export default function MoviePreview() {
   const params = useParams();
@@ -42,7 +43,9 @@ export default function MoviePreview() {
           }}
         >
           <Grid item xs={12} md={4}>
-            <img src="#" alt="#" />
+            <MoviePosterLibrary
+              images={posterImage.map((item) => path.images + item.file_path)}
+            />
           </Grid>
           <Grid container item xs={12} md={8}>
             <Grid item xs={12}>
