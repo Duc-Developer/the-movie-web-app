@@ -20,18 +20,19 @@ export default function MoviePosterLibrary(props) {
         <Grid item xs={8} className="movie-poster-library__preview">
           <img src={!preview ? images[0] : preview} alt="main-image-preview" />
         </Grid>
-        <Grid className="movie-poster-library__list-images" item xs={4}>
+        <Grid className="movie-poster-library__list-images" container item xs={4}>
           {images &&
             images.map((image, index) => {
               return (
-                <div
-                key={index}
+                 <Grid item key={index} xs={12}>
+                    <img 
+                  src={image} 
+                  alt={`movie-image-${index}`} 
                   onClick={() => {
                     setPreview(image);
                   }}
-                >
-                  <img src={image} alt={`movie-image-${index}`} />
-                </div>
+                  />
+                 </Grid>
               );
             })}
         </Grid>

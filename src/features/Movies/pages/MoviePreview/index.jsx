@@ -30,10 +30,11 @@ export default function MoviePreview() {
 
   return (
     <div className="movie-preview">
-      <Grid container spacing={1}>
+      <Grid container>
         <Grid
           container
           item
+          spacing={1}
           xs={12}
           className="movie-preview__header-poster"
           style={{
