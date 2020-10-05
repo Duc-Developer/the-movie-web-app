@@ -25,6 +25,7 @@ export default function AiringTodayPage() {
           setPage(num);
         }}
         totalPages={totalPages}
+        type="tv"
       />
     </div>
   );

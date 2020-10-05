@@ -25,6 +25,7 @@ export default function OnTvPage() {
           setPage(num);
         }}
         totalPages={totalPages}
+        type="tv"
       />
     </div>
   );

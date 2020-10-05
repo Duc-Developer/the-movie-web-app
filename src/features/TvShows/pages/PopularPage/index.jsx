@@ -25,6 +25,7 @@ export default function PopularPage() {
           setPage(num);
         }}
         totalPages={totalPages}
+        type="tv"
       />
     </div>
   );

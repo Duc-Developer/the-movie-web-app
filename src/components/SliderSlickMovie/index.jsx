@@ -17,7 +17,7 @@ SliderSlickMovie.propTypes = {
 SliderSlickMovie.defaultProps = {
   title: "example",
   dataType1: "tv",
-  dataType2: "movie",
+  dataType2: "movies",
   handleType: () => {},
 };
 

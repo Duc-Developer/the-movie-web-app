@@ -23,6 +23,7 @@ export default function PopularPage() {
       <CommonPage
         listData={list}
         totalPages={totalPages}
+        type="movies"
         handlePageChange={(num) => {
           setPage(num);
         }}

@@ -24,7 +24,7 @@ export default function NowPlayingPage() {
       <CommonPage
         listData={list}
         totalPages={totalPages}
-        pageCurrent={page}
+        type="movies"
         handlePageChange={(num) => {
           setPage(num);
         }}

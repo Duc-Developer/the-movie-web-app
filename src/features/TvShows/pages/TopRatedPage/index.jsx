@@ -25,6 +25,7 @@ export default function TopRatedPage() {
           setPage(num);
         }}
         totalPages={totalPages}
+        type="tv"
       />
     </div>
   );

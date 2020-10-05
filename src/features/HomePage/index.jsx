@@ -45,7 +45,7 @@ export default function HomePage() {
       setPopularData(dataApi);
       return;
     }
-    if (currentPopularType === "movie") {
+    if (currentPopularType === "movies") {
       dataApi = await axios
         .get(
           `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi&page=1`
@@ -112,7 +112,7 @@ export default function HomePage() {
           }}
           title={titles[0]}
           dataType1="tv"
-          dataType2="movie"
+          dataType2="movies"
         />
         <SliderSlickMovie
           data={trendingData}

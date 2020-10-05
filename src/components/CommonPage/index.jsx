@@ -8,10 +8,11 @@ CommonPage.propTypes = {
   listData: PropTypes.array,
   handlePageChange: PropTypes.func,
   totalPages: PropTypes.number,
+  type: PropTypes.string
 };
 
 export default function CommonPage(props) {
-  const { listData, handlePageChange, totalPages } = props;
+  const { listData, handlePageChange, totalPages, type } = props;
   return (
     <div>
       <Grid container>
@@ -32,6 +33,7 @@ export default function CommonPage(props) {
                     originalName={movie.original_name || movie.original_title}
                     width="12em"
                     height="25em"
+                    type={type}
                   />
                 </Grid>
               );
