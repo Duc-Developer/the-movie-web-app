@@ -11,7 +11,7 @@ export default function Peoples() {
         <Route exact path="/peoples/popular-peoples">
           <PopularPage />
         </Route>
-        <Route exact path="/peoples/:id" component={PeoplePreview} />
+        <Route exact path="/peoples/person/:id" component={PeoplePreview} />
       </Suspense>
     </div>
   );

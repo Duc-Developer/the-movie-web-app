@@ -6,9 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import { moivesDbConstants as path } from "../../../../constants";
 import {
-  CardActions,
   Collapse,
-  IconButton,
   List,
   ListItem,
   ListItemIcon,
@@ -16,16 +14,19 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import { useHistory } from "react-router-dom";
 
 PeopleCard.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   knownFor: PropTypes.array,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default function PeopleCard(props) {
-  const { image, name, knownFor } = props;
+  const { image, name, knownFor, id } = props;
   const [expanded, setExpanded] = useState(false);
+  const history = useHistory();
 
   return (
     <div className="people-card">
@@ -34,6 +35,13 @@ export default function PeopleCard(props) {
           className="people-card__media"
           image={path.images + image}
           title={name}
+          onClick={() => {
+            history.push(`/peoples/person/${id}`);
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
         />
         <CardContent>
           <List>

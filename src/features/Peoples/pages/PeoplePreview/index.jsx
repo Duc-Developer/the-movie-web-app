@@ -10,24 +10,32 @@ export default function PeoplePreview(props) {
   const params = useParams();
   const [details, setDetails] = useState(null);
   const [personTranslations, setPersonTranslations] = useState([]);
+  const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/person/${params.id}?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi`
-      )
-      .then((res) => {
-        setDetails(res.data);
-      });
+    async function getData() {
+      let detailApi = await axios
+        .get(
+          `https://api.themoviedb.org/3/person/${params.id}?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi`
+        )
+        .then((res) => res.data);
+      let translationApi = await axios
+        .get(
+          `https://api.themoviedb.org/3/person/${params.id}/translations?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}`
+        )
+        .then((res) => res.data.translations);
+      let castApi = await axios
+        .get(
+          `https://api.themoviedb.org/3/person/${params.id}/movie_credits?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi`
+        )
+        .then((res) => res.data.cast);
+      setDetails(detailApi);
+      setPersonTranslations(translationApi);
+      setCast(castApi);
+    }
+    getData();
+  }, [personTranslations.length, params.id, cast.length]);
 
-    axios
-      .get(
-        `https://api.themoviedb.org/3/person/${params.id}/translations?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}`
-      )
-      .then((res) => {
-        setPersonTranslations(res.data.translations);
-      });
-  }, [personTranslations.length]);
   return (
     <div style={{ paddingTop: "5em" }}>
       <Container>
@@ -40,12 +48,13 @@ export default function PeoplePreview(props) {
             )}
           </Grid>
           <Grid item xs={12} md={9}>
-            {!details ? (
+            {!details || !cast.length ? (
               <div>Loading...</div>
             ) : (
-              <PersonStory 
-              name={details.name}
-              translations={personTranslations} 
+              <PersonStory
+                name={details.name}
+                translations={personTranslations}
+                cast={cast}
               />
             )}
           </Grid>

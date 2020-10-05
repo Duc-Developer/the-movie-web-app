@@ -11,6 +11,7 @@ SliderSlickMovie.propTypes = {
   dataType1: PropTypes.string,
   dataType2: PropTypes.string,
   handleType: PropTypes.func,
+  switchDisabled: PropTypes.bool,
 };
 
 SliderSlickMovie.defaultProps = {
@@ -25,12 +26,19 @@ export default function SliderSlickMovie(props) {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: sliderNumberCurrent(),
+    slidesToShow: props.slideNumber || sliderNumberCurrent(),
     slidesToScroll: 1,
     easing: "ease-in-out",
   };
   const sliderRef = useRef(null);
-  const { data, title, dataType1, dataType2, handleType } = props;
+  const {
+    data,
+    title,
+    dataType1,
+    dataType2,
+    handleType,
+    switchDisabled,
+  } = props;
   const [type, setType] = useState(dataType1);
 
   function sliderNumberCurrent() {
@@ -52,11 +60,27 @@ export default function SliderSlickMovie(props) {
   return (
     <div className="slider-slick-movie">
       <Grid container className="slider-slick-movie__header">
-        <Grid item lg={2}sm={3} xs={12} className="slider-slick-movie__header-left">
+        <Grid
+          item
+          lg={2}
+          sm={3}
+          xs={12}
+          className="slider-slick-movie__header-left"
+        >
           <Typography variant="h5">{title}</Typography>
         </Grid>
-        <Grid item lg={10}sm={9} xs={12} className="slider-slick-movie__header-right">
-          <ButtonGroup color="primary" className="slider-slick-movie__switcher">
+        <Grid
+          item
+          lg={10}
+          sm={9}
+          xs={12}
+          className="slider-slick-movie__header-right"
+        >
+          <ButtonGroup
+            style={{ display: switchDisabled ? "none" : "" }}
+            color="primary"
+            className="slider-slick-movie__switcher"
+          >
             <Button
               onClick={() => {
                 setType(dataType1);
@@ -77,7 +101,11 @@ export default function SliderSlickMovie(props) {
             </Button>
           </ButtonGroup>
           {data && (
-            <ButtonGroup variant="text" color="primary" className="slider-slick-movie__actions">
+            <ButtonGroup
+              variant="text"
+              color="primary"
+              className="slider-slick-movie__actions"
+            >
               <Button
                 onClick={() => {
                   sliderRef.current.slickPrev();

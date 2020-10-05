@@ -10,14 +10,21 @@ export default function PopularPage() {
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi&page=${page}`
-      )
-      .then((res) => {
-        setPeoples(res.data.results);
-        setTotalPages(res.data.total_pages);
-      });
+    async function getData() {
+      let peopleData = await axios
+        .get(
+          `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi&page=${page}`
+        )
+        .then((res) => res.data.results);
+      let dataPages = await axios
+        .get(
+          `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi&page=${page}`
+        )
+        .then((res) => res.data.total_pages);
+      setPeoples(peopleData);
+      setTotalPages(dataPages);
+    }
+    getData();
   }, [peoples.length, page, totalPages]);
 
   return (
@@ -29,10 +36,11 @@ export default function PopularPage() {
             peoples.map((person) => {
               return (
                 <Grid key={person.id} item xs={12} sm={4} md={3}>
-                  <PeopleCard 
-                  image={person.profile_path} 
-                  name={person.name} 
-                  knownFor={person.known_for}
+                  <PeopleCard
+                    id={person.id}
+                    image={person.profile_path}
+                    name={person.name}
+                    knownFor={person.known_for}
                   />
                 </Grid>
               );
