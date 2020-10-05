@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { moivesDbConstants as path } from "../../../../constants";
 import MoviePosterLibrary from "../../../../components/MoviePosterLibrary";
+import CircularProgressWithLabel from "../../../../components/CircularProgressWithLabel";
 
 export default function MoviePreview() {
   const params = useParams();
   const [posterImage, setPosterImage] = useState([]);
   const [backDrops, setBackDrops] = useState([]);
+  const [details, setDetails] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -22,8 +24,14 @@ export default function MoviePreview() {
           `https://api.themoviedb.org/3/movie/${params.id}/images?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi&include_image_language=en`
         )
         .then((res) => res.data.backdrops);
+      let detailApi = await axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${params.id}?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&language=vi`
+        )
+        .then((res) => res.data);
       setPosterImage(posterApi);
       setBackDrops(backDropApi);
+      setDetails(detailApi);
     }
     getData();
   }, [posterImage.length, backDrops.length]);
@@ -34,7 +42,7 @@ export default function MoviePreview() {
         <Grid
           container
           item
-          spacing={1}
+          spacing={2}
           xs={12}
           className="movie-preview__header-poster"
           style={{
@@ -49,18 +57,102 @@ export default function MoviePreview() {
             />
           </Grid>
           <Grid container item xs={12} md={8}>
-            <Grid item xs={12}>
-              <Typography variant="h4">name</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              score and action here
-            </Grid>
-            <Grid item xs={12}>
-              Over view here
-            </Grid>
-            <Grid item xs={12}>
-              director and action here
-            </Grid>
+            {!details ? (
+              <div>Loading...</div>
+            ) : (
+              <>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="h4"
+                    className="movie-preview__header-text"
+                  >
+                    {details.title || details.original_language}
+                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    className="movie-preview__header-text"
+                  >
+                    {details.release_date +
+                      " - " +
+                      details.runtime +
+                      " minutes"}
+                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    component="p"
+                    className="movie-preview__header-text"
+                  >
+                    {details.genres.map((text) => text.name + ", ")}
+                  </Typography>
+                </Grid>
+                <Grid
+                  container
+                  item
+                  xs={12}
+                  alignItems="center"
+                  direction="row"
+                >
+                  <div>
+                    <CircularProgressWithLabel
+                      value={details.vote_average * 10}
+                      size={3.5}
+                    />
+                  </div>
+                  <Typography
+                    variant="h6"
+                    className="movie-preview__header-text"
+                  >
+                    User Score
+                  </Typography>
+                </Grid>
+                <Grid
+                  alignItems="center"
+                  direction="row"
+                  container
+                  item
+                  xs={12}
+                >
+                  <Typography
+                    variant="h6"
+                    className="movie-preview__header-text"
+                  >
+                    HomePage:{" "}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    component="i"
+                    color="primary"
+                  >
+                    {details.homepage}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="h6"
+                    className="movie-preview__header-text"
+                  >
+                    Over View:
+                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    component="p"
+                    className="movie-preview__header-text"
+                  >
+                    {details.overview}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="h6" className="movie-preview__header-text">
+                    Companies:
+                  </Typography>
+                  <Typography variant="subtitle1" className="movie-preview__header-text" component="p">
+                    {details.production_companies.map(text => {
+                      return text.name + ", "
+                    })}
+                  </Typography>
+                </Grid>
+              </>
+            )}
           </Grid>
         </Grid>
       </Grid>

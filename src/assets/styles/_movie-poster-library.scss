@@ -1,5 +1,9 @@
 .movie-poster-library {
 
+  img {
+    border-radius: 20px;
+  }
+
   &__preview {
     img {
       width: 100%;

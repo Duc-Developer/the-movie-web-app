@@ -4,5 +4,18 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 1em 0 1em 0;
+
+    &-left {
+
+    }
+
+    &-right {
+        padding-left: 1em;
+    }
+  }
+
+  &__header-text {
+      color: rgba(255, 255, 255);
   }
 }
