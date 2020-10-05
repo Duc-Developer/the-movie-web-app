@@ -32,7 +32,7 @@ export default function CommonPage(props) {
   const { listData, handlePageChange, totalPages, type } = props;
   return (
     <div>
-      <Grid container spacing={1}>
+      <Grid container spacing={3}>
         <Grid item xs={12} sm={12} lg={3}>
           <Slider {...settings}>
             {[sliderImage001, sliderImage002, sliderImage003].map(
