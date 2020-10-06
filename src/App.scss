@@ -14,14 +14,15 @@
 @import "./assets/styles/home-page";
 @import "./assets/styles/movie-card";
 @import "./assets/styles/slider-slick-movie";
-@import "./assets/styles/_footer.scss";
+@import "./assets/styles/footer";
 @import "./assets/styles/nav-menu-desktop";
-@import "./assets/styles/_people-card.scss";
-@import "./assets/styles/_person-information.scss";
-@import "./assets/styles/_person-story.scss";
+@import "./assets/styles/people-card";
+@import "./assets/styles/person-information";
+@import "./assets/styles/person-story";
 @import "./assets/styles/movie-preview";
 @import "./assets/styles/movie-poster-library";
-@import "./assets/styles/_circular-progress-with-label.scss";
+@import "./assets/styles/circular-progress-with-label";
+@import "./assets/styles/header-poster-prev";
 
 .App {
     font-family: $roboto-font;
