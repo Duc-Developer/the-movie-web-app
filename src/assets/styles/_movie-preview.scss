@@ -1,3 +1,32 @@
 .movie-preview {
- 
+  &__body-page {
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+  }
+
+  &__character {
+    .MuiCard-root {
+      margin: 0 0.5em 0 0.5em;
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .movie-preview {
+    &__body-page {
+      padding-top: 1em;
+      padding-bottom: 1em;
+  
+    }
+  
+    &__character {
+      .MuiCard-root {
+        margin: 0 0.5em 0 0.5em;
+      }
+    }
+    &__slider-dots {
+      display: none
+    }
+  }
 }
