@@ -1,4 +1,11 @@
-import { Card, CardMedia, Grid, Typography } from "@material-ui/core";
+import {
+  List,
+  Grid,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -6,6 +13,10 @@ import { moivesDbConstants as path } from "../../../../constants";
 import HeaderPosterPrev from "../../../../components/HeaderPosterPrev";
 import Slider from "react-slick";
 import PersonSimpleCard from "../../../../components/PersonSimpleCard";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import clsx from "clsx";
 
 const headerGreadient =
   "linear-gradient(to right, rgba(19.61%, 7.84%, 7.84%, 1.00) 150px, rgba(27.45%, 13.73%, 13.73%, 0.84) 100%)";
@@ -26,21 +37,16 @@ function sliderNumberCurrent() {
   }
 }
 
-const settings = {
+const charaterSliderSettings = {
   dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: sliderNumberCurrent(),
   slidesToScroll: 1,
-  centerPadding: "200px",
   slidesToScroll: sliderNumberCurrent(),
   appendDots: (dots) => (
     <div>
-      <ul
-        className="movie-preview__slider-dots"
-      >
-        {dots}
-      </ul>
+      <ul className="movie-preview__slider-dots">{dots}</ul>
     </div>
   ),
   customPaging: (i) => (
@@ -57,12 +63,23 @@ const settings = {
   ),
 };
 
+const trailerSliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+};
+
 export default function MoviePreview() {
   const params = useParams();
   const [posterImages, setPosterImages] = useState([]);
   const [backDrops, setBackDrops] = useState([]);
   const [details, setDetails] = useState(null);
   const [characters, setCharacters] = useState([]);
+  const [trailers, setTrailers] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -86,13 +103,33 @@ export default function MoviePreview() {
           `https://api.themoviedb.org/3/movie/${params.id}/credits?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}`
         )
         .then((res) => res.data.cast);
+      let trailerApi = await axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${params.id}/videos?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}`
+        )
+        .then((res) => res.data.results);
+      let reviewApi = await axios
+        .get(
+          `
+      https://api.themoviedb.org/3/movie/${params.id}/reviews?api_key=${process.env.REACT_APP_THE_MOVIES_API_KEY}&page=1`
+        )
+        .then((res) => res.data.results);
+
       setPosterImages(posterApi);
       setBackDrops(backDropApi);
       setDetails(detailApi);
       setCharacters(characterApi);
+      setTrailers(trailerApi);
+      setReviews(reviewApi);
     }
     getData();
-  }, [posterImages.length, backDrops.length, characters.length]);
+  }, [
+    posterImages.length,
+    backDrops.length,
+    characters.length,
+    trailers.length,
+    reviews.length,
+  ]);
 
   return (
     <div className="movie-preview">
@@ -122,7 +159,7 @@ export default function MoviePreview() {
             {characters.length === 0 ? (
               <div>Have not character information here</div>
             ) : (
-              <Slider {...settings}>
+              <Slider {...charaterSliderSettings}>
                 {characters.map((character) => {
                   return (
                     <div
@@ -139,6 +176,74 @@ export default function MoviePreview() {
                   );
                 })}
               </Slider>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h5">Trailer:</Typography>
+            {trailers.length === 0 ? (
+              <Typography variant="subtitle1" component="i">
+                Have not trailer for this movie/tv!
+              </Typography>
+            ) : (
+              <Slider {...trailerSliderSettings}>
+                {trailers.map((trailer) => {
+                  return (
+                    <div key={trailer.id}>
+                      <iframe
+                        id={trailer.id}
+                        type="text/html"
+                        className="movie-preview__trailer-iframe"
+                        src={`https://www.youtube.com/embed/${trailer.key}`}
+                      ></iframe>
+                    </div>
+                  );
+                })}
+              </Slider>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h5">Reviews:</Typography>
+            {reviews.length === 0 ? (
+              <Typography variant="subtitle1">
+                Have not reviewed any reviews yet
+              </Typography>
+            ) : (
+              <div className="movie-preview__reviews">
+                <List>
+                  {reviews.map((review) => {
+                    return (
+                      <ListItem
+                        key={review.id}
+                        className={
+                          expanded !== review.id
+                            ? "movie-preview__reviews-text"
+                            : "movie-preview__reviews-text--expanded"
+                        }
+                      >
+                        <ListItemIcon>
+                          <AccountCircleIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={review.content} />
+                        <ListItemIcon>
+                          {expanded !== review.id ? (
+                            <ExpandMoreIcon
+                              onClick={() => {
+                                setExpanded(review.id);
+                              }}
+                            />
+                          ) : (
+                            <ExpandLessIcon
+                              onClick={() => {
+                                setExpanded(false);
+                              }}
+                            />
+                          )}
+                        </ListItemIcon>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </div>
             )}
           </Grid>
         </Grid>
