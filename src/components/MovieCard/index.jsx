@@ -29,7 +29,7 @@ MovieCard.propType = {
 };
 
 MovieCard.defaultProps = {
-  type: "",
+  type: "", // movies || tv
   image: "/dzOxNbbz1liFzHU1IPvdgUR647b.jpg",
   originalName: "something was wrong",
   id: 111111111,

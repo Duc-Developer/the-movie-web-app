@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SliderSlickMovie from "../../components/SliderSlickMovie";
 import screenshotImg from "../../assets/images/Screenshot from 2020-10-01 21-02-16.jpg";
+import { useHistory } from "react-router-dom";
 
 const settings = {
   dots: false,
@@ -20,6 +21,8 @@ export default function HomePage() {
   const [trendingData, setTrendingData] = useState([]);
   const [currentPopularType, setCurrentPopularType] = useState("tv");
   const [currentTrendingType, setCurrentTrendingType] = useState("today");
+  const [inputSearch, setInputSearch] = useState("");
+  const history = useHistory();
 
   function handleType(type, title) {
     if (title === titles[0]) {
@@ -30,6 +33,10 @@ export default function HomePage() {
       setCurrentTrendingType(type);
       return;
     }
+  }
+
+  function handleSearch(e) {
+    setInputSearch(e.target.value)
   }
 
   async function getPopular() {
@@ -99,8 +106,21 @@ export default function HomePage() {
             <InputBase
               className="home-page__header-content-input"
               placeholder="Search for movies, TV shows, person..."
+              onChange={(e) => {handleSearch(e)}}
             />
-            <Button>Search</Button>
+            <Button 
+            onClick={() => {
+              if(inputSearch === ""){
+                return;
+              }
+              history.push({
+                pathname: "/search",
+                search: `?query=${inputSearch}`
+              })
+            }}
+            >
+              Search
+              </Button>
           </div>
         </div>
       </div>

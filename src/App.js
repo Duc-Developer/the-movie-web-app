@@ -15,6 +15,7 @@ import { movieRoutes, tvRoutes, peopleRoutes } from './constants';
 const Movies = React.lazy(() => import("./features/Movies"));
 const TvShows = React.lazy(() => import("./features/TvShows"));
 const Peoples = React.lazy(() => import("./features/Peoples"));
+const Search = React.lazy(() => import("./features/SearchPage"));
 
 function App() {
   
@@ -31,6 +32,7 @@ function App() {
             <Route path={movieRoutes.path} component={Movies}/>
             <Route path={tvRoutes.path} component={TvShows}/>
             <Route path={peopleRoutes.path} component={Peoples}/>
+            <Route path="/search" component={Search} />
   
             <Route>
               <NotFound />
