@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppBar,
   Container,
   IconButton,
   Toolbar,
-  Typography,
   useScrollTrigger,
   Slide,
+  ButtonGroup,
+  Button,
 } from "@material-ui/core";
 import logo from "../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import PropTypes from "prop-types";
@@ -15,6 +16,7 @@ import ReorderIcon from "@material-ui/icons/Reorder";
 import NavMenuDesktop from "./NavMenuDesktop";
 import NavMenuMobile from "./NavMenuMobile";
 import { movieRoutes, tvRoutes } from "../../constants";
+import { userRoutes } from "../../constants";
 
 const movieDropdown = {
   id: "movie-dropdown-id",
@@ -137,7 +139,26 @@ export default function NavBarHeader(props) {
                 />
               </div>
               <div>
-                <Typography>Login</Typography>
+                <ButtonGroup variant="text" color="inherit">
+                  <Button
+                    onClick={() => {
+                      history.push(
+                        userRoutes.path + userRoutes.children.login.path
+                      );
+                    }}
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      history.push(
+                        userRoutes.path + userRoutes.children.register.path
+                      );
+                    }}
+                  >
+                    Register
+                  </Button>
+                </ButtonGroup>
               </div>
             </Toolbar>
           </AppBar>
