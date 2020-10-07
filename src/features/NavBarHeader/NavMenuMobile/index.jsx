@@ -133,7 +133,9 @@ export default function NavMenuMobile(props) {
               <div key={menu.id}>
                 <ListItem
                   onClick={() => {
-                    setOpenDropdown(menu.id);
+                    openDropdown === menu.id
+                    ? setOpenDropdown(false)
+                    : setOpenDropdown(menu.id);
                   }}
                   button
                 >
