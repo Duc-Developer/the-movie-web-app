@@ -36,8 +36,8 @@ export default function PeopleCard(props) {
           }}
         />
         <CardContent>
-          <Typography variant="h6">{role}</Typography>
-          <Typography variant="body2">{name}</Typography>
+          <Typography variant="subtitle2">{role}</Typography>
+          <Typography variant="caption">{name}</Typography>
         </CardContent>
       </Card>
     </div>
