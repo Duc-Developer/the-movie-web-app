@@ -31,7 +31,7 @@ HeaderPosterPrev.defaultProps = {
 
 export default function HeaderPosterPrev(props) {
   const { details, backDrop, posterImages, backDropGradient } = props;
-  console.log(details);
+  
   return (
     <div className="header-poster-prev">
       <Grid

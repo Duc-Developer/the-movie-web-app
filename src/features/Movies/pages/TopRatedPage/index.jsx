@@ -17,7 +17,7 @@ export default function TopRatedPage() {
         setTotalPages(res.data.total_pages);
       });
   }, [list.length, page]);
-  console.log();
+ 
   return (
     <div>
       <CommonPage

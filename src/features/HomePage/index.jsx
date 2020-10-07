@@ -111,8 +111,8 @@ export default function HomePage() {
             handleType(type, title);
           }}
           title={titles[0]}
-          dataType1="tv"
-          dataType2="movies"
+          switch1="tv"
+          switch2="movies"
         />
         <SliderSlickMovie
           data={trendingData}
@@ -120,8 +120,8 @@ export default function HomePage() {
             handleType(type, title);
           }}
           title={titles[1]}
-          dataType1="today"
-          dataType2="this week"
+          switch1="today"
+          switch2="this week"
         />
       </div>
       <div>

@@ -8,16 +8,16 @@ SliderSlickMovie.propTypes = {
   data: PropTypes.array,
   title: PropTypes.string,
   slideNumber: PropTypes.number,
-  dataType1: PropTypes.string,
-  dataType2: PropTypes.string,
+  switch1: PropTypes.string,
+  switch2: PropTypes.string,
   handleType: PropTypes.func,
   switchDisabled: PropTypes.bool,
 };
 
 SliderSlickMovie.defaultProps = {
   title: "example",
-  dataType1: "tv",
-  dataType2: "movies",
+  switch1: "tv", // today
+  switch2: "movies", // this week
   handleType: () => {},
 };
 
@@ -31,16 +31,10 @@ export default function SliderSlickMovie(props) {
     easing: "ease-in-out",
   };
   const sliderRef = useRef(null);
-  const {
-    data,
-    title,
-    dataType1,
-    dataType2,
-    handleType,
-    switchDisabled,
-  } = props;
-  const [type, setType] = useState(dataType1);
+  const { data, title, switch1, switch2, handleType, switchDisabled } = props;
+  const [type, setType] = useState(switch1);
 
+  // chọn giá trị số movie poster hiển thị trên 1 slider ứng với mỗi kích thước màn hình
   function sliderNumberCurrent() {
     let screen = window.screen.width;
     if (screen <= 425) {
@@ -54,6 +48,25 @@ export default function SliderSlickMovie(props) {
     }
     if (screen > 1140) {
       return 8;
+    }
+  }
+
+  function handleMediaType(media) {
+    
+    if (!media) {
+      // nếu media không tồn tại type của MovieCard được chọn theo giá trị của switch hiện tại
+      return type;
+    } else {
+      // nếu media tồn tại sẽ có 1 trong 2 giá trị tv hoặc movie
+      // do ta định nghĩa type truyền vào MovieCard gồm tv || movies nên ta sẽ trả về kiểu dữ liệu cho đúng
+      switch(media) {
+        case "movie":
+          return "movies";
+        case "tv":
+          return "tv";
+        default:
+          return media;
+      }
     }
   }
 
@@ -83,21 +96,21 @@ export default function SliderSlickMovie(props) {
           >
             <Button
               onClick={() => {
-                setType(dataType1);
-                handleType(dataType1, title);
+                setType(switch1);
+                handleType(switch1, title);
               }}
-              variant={dataType1 === type ? "contained" : "outlined"}
+              variant={switch1 === type ? "contained" : "outlined"}
             >
-              {dataType1.toUpperCase()}
+              {switch1.toUpperCase()}
             </Button>
             <Button
               onClick={() => {
-                setType(dataType2);
-                handleType(dataType2, title);
+                setType(switch2);
+                handleType(switch2, title);
               }}
-              variant={dataType2 === type ? "contained" : "outlined"}
+              variant={switch2 === type ? "contained" : "outlined"}
             >
-              {dataType2.toUpperCase()}
+              {switch2.toUpperCase()}
             </Button>
           </ButtonGroup>
           {data && (
@@ -137,7 +150,7 @@ export default function SliderSlickMovie(props) {
                   <MovieCard
                     name={!item.name ? item.title : item.name}
                     id={item.id}
-                    type={type}
+                    type={handleMediaType(item.media_type)}
                     image={item.poster_path}
                     voteAverage={item.vote_average}
                     firstAirDate={item.first_air_date}

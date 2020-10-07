@@ -18,7 +18,7 @@ export default function NowPlayingPage() {
       });
     
   }, [list.length, page]);
-  console.log();
+  
   return (
     <div>
       <CommonPage
