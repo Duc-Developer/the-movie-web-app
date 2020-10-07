@@ -10,12 +10,13 @@ import NotFound from './components/NotFound';
 import Loading from './components/Loading';
 import HomePage from './features/HomePage';
 import Footer from './components/Footer';
-import { movieRoutes, tvRoutes, peopleRoutes } from './constants';
+import { movieRoutes, tvRoutes, peopleRoutes, userRoutes } from './constants';
 
 const Movies = React.lazy(() => import("./features/Movies"));
 const TvShows = React.lazy(() => import("./features/TvShows"));
 const Peoples = React.lazy(() => import("./features/Peoples"));
 const Search = React.lazy(() => import("./features/SearchPage"));
+const User = React.lazy(() => import("./features/User"));
 
 function App() {
   
@@ -32,6 +33,7 @@ function App() {
             <Route path={movieRoutes.path} component={Movies}/>
             <Route path={tvRoutes.path} component={TvShows}/>
             <Route path={peopleRoutes.path} component={Peoples}/>
+            <Route path={userRoutes.path} component={User} />
             <Route path="/search" component={Search} />
   
             <Route>

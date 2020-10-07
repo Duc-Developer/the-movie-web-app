@@ -46,3 +46,18 @@ export const peopleRoutes = {
         }
     }
 }
+
+export const userRoutes = {
+    path: '/user',
+    children: {
+        login: {
+            path: '/login'
+        },
+        register: {
+            path: '/register'
+        },
+        wish_list: {
+            path: '/wishlist'
+        }
+    }
+}

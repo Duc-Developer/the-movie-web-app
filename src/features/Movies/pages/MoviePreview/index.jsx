@@ -16,7 +16,7 @@ import PersonSimpleCard from "../../../../components/PersonSimpleCard";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import clsx from "clsx";
+import posterDefault from "../../../../assets/images/no_poster.jpg";
 
 const headerGreadient =
   "linear-gradient(to right, rgba(19.61%, 7.84%, 7.84%, 1.00) 150px, rgba(27.45%, 13.73%, 13.73%, 0.84) 100%)";
@@ -142,9 +142,11 @@ export default function MoviePreview() {
               : `${path.images}${backDrops[0].file_path}`
           }
           backDropGradient={headerGreadient}
-          posterImages={posterImages.map(
-            (item) => path.images + item.file_path
-          )}
+          posterImages={
+            posterImages.length === 0
+              ? [posterDefault]
+              : posterImages.map((item) => path.images + item.file_path)
+          }
         />
         <Grid
           container

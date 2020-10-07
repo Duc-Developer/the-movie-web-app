@@ -17,6 +17,7 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import StarIcon from "@material-ui/icons/Star";
 import CircularProgressWithLabel from "../CircularProgressWithLabel";
 import { movieRoutes, tvRoutes } from "../../constants";
+import posterDefault from "../../assets/images/no_poster.jpg";
 
 MovieCard.propType = {
   type: PropTypes.oneOf(["tv", "movie"]),
@@ -76,7 +77,7 @@ export default function MovieCard(props) {
         </div>
         <CardMedia
           className="movie-card__media"
-          image={path.images + image}
+          image={image ? path.images + image : posterDefault}
           title={originalName}
           onClick={() => {
             if (type === "movies") {
