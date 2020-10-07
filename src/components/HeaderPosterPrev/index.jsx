@@ -31,6 +31,7 @@ HeaderPosterPrev.defaultProps = {
 
 export default function HeaderPosterPrev(props) {
   const { details, backDrop, posterImages, backDropGradient } = props;
+  console.log(details);
   return (
     <div className="header-poster-prev">
       <Grid
@@ -56,13 +57,16 @@ export default function HeaderPosterPrev(props) {
                   variant="h4"
                   className="header-poster-prev__text--white"
                 >
-                  {details.title || details.original_language}
+                  {details.title || details.name}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   className="header-poster-prev__text--white"
                 >
-                  {details.release_date + " - " + details.runtime + " minutes"}
+                  {(details.release_date || details.first_air_date) +
+                    " - " +
+                    (details.runtime || details.episode_run_time[0]) +
+                    " minutes"}
                 </Typography>
                 <Typography
                   variant="subtitle1"
