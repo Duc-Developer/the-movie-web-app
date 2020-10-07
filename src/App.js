@@ -27,7 +27,7 @@ function App() {
               <HomePage />
             </Route>
             <Route path="/movies" component={Movies}/>
-            <Route path="/tv-shows" component={TvShows}/>
+            <Route path="/tv" component={TvShows}/>
             <Route path="/peoples" component={Peoples}/>
   
             <Route>

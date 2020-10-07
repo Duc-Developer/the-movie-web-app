@@ -27,13 +27,13 @@ const movieDropdown = {
 };
 
 const tvShowsDropdown = {
-  id: "tv-shows-dropdown-id",
+  id: "tv-dropdown-id",
   name: "TV Shows",
   listItem: [
-    { name: "Popular", path: "/tv-shows/popular" },
-    { name: "Airing Today", path: "/tv-shows/airing-today" },
-    { name: "On TV", path: "/tv-shows/on-tv" },
-    { name: "Top Rated", path: "/tv-shows/top-rated" },
+    { name: "Popular", path: "/tv/popular" },
+    { name: "Airing Today", path: "/tv/airing-today" },
+    { name: "On TV", path: "/tv/on-tv" },
+    { name: "Top Rated", path: "/tv/top-rated" },
   ],
 };
 
