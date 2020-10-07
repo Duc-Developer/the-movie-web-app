@@ -1,0 +1,11 @@
+.login-page {
+    background-color: rgb(3, 187, 110);
+    padding-top: 5em;
+    padding-bottom: 5em;
+
+    &__form {
+        margin: auto;
+        width: 600px;
+        background-color: white;
+    }
+}
