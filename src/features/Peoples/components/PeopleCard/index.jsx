@@ -15,6 +15,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { useHistory } from "react-router-dom";
+import avatarDefault from "../../../../assets/images/default_avatar.png";
 
 PeopleCard.propTypes = {
   image: PropTypes.string,
@@ -33,7 +34,7 @@ export default function PeopleCard(props) {
       <Card className="people-card__wraper">
         <CardMedia
           className="people-card__media"
-          image={path.images + image}
+          image={image ? path.images + image : avatarDefault}
           title={name}
           onClick={() => {
             history.push(`/peoples/person/${id}`);

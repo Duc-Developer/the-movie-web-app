@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { moivesDbConstants as path } from "../../constants";
 import { useHistory } from "react-router-dom";
 import { peopleRoutes } from "../../constants";
+import avatarDefault from "../../assets/images/default_avatar.png";
 
 PeopleCard.propTypes = {
   image: PropTypes.string,
@@ -27,7 +28,7 @@ export default function PeopleCard(props) {
       <Card className="person-simple-card__wraper">
         <CardMedia
           className="person-simple-card__media"
-          image={path.images + image}
+          image={image ? path.images + image : avatarDefault}
           title={name}
           style={{ height: avatarHeight }}
           onClick={() => {

@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { moivesDbConstants as path } from "../../../../constants";
+import avatarDefault from "../../../../assets/images/default_avatar.png";
 
 PersonInformation.propTypes = {
   details: PropTypes.object,
@@ -15,7 +16,11 @@ export default function PersonInformation(props) {
       <Card className="person-information__wrapper">
         <CardMedia
           className="person-information__media"
-          image={path.images + details.profile_path}
+          image={
+            details.profile_path
+              ? path.images + details.profile_path
+              : avatarDefault
+          }
           title="Paella dish"
         />
         <CardContent>
