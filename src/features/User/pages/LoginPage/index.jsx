@@ -1,6 +1,7 @@
 import React from "react";
 import TextFieldController from "../../../../fields/TextFieldController";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useForm } from "react-hook-form";
 
 const defaultValues = {
@@ -29,6 +30,7 @@ export default function LoginPage() {
           }}
           icon={<AccountCircle />}
           name="userName"
+          type="text"
         />
         <button type="submit">submit</button>
       </form>

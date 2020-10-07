@@ -11,10 +11,11 @@ TextFieldController.propTypes = {
   name: PropTypes.string,
   rules: PropTypes.object,
   icon: PropTypes.node,
+  type: PropTypes.string
 };
 
 export default function TextFieldController(props) {
-  const { control, errors, name, rules, icon } = props;
+  const { control, errors, name, rules, icon, type } = props;
 
   return (
     <Controller
@@ -25,7 +26,8 @@ export default function TextFieldController(props) {
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <TextField
-              label="User"
+              label={name}
+              type={type}
               onChange={(e) => {
                 onChange(e.target.value);
               }}
