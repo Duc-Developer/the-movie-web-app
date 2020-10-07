@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import { moivesDbConstants as path } from "../../constants";
 import { useHistory } from "react-router-dom";
+import { peopleRoutes } from "../../constants";
 
 PeopleCard.propTypes = {
   image: PropTypes.string,
@@ -14,6 +15,8 @@ PeopleCard.propTypes = {
   role: PropTypes.string,
   avatarHeight: PropTypes.string,
 };
+
+const { person } = peopleRoutes.children;
 
 export default function PeopleCard(props) {
   const { image, name, id, role, avatarHeight } = props;
@@ -28,7 +31,7 @@ export default function PeopleCard(props) {
           title={name}
           style={{ height: avatarHeight }}
           onClick={() => {
-            history.push(`/peoples/person/${id}`);
+            history.push(`${peopleRoutes.path + person.path}/${id}`);
             window.scrollTo({
               top: 0,
               behavior: "smooth",

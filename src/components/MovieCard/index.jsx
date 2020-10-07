@@ -16,6 +16,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import StarIcon from "@material-ui/icons/Star";
 import CircularProgressWithLabel from "../CircularProgressWithLabel";
+import { movieRoutes, tvRoutes } from "../../constants";
 
 MovieCard.propType = {
   type: PropTypes.oneOf(["tv", "movie"]),
@@ -46,7 +47,7 @@ export default function MovieCard(props) {
     name,
     firstAirDate,
     originalName,
-    width, 
+    width,
     height,
   } = props;
   const history = useHistory();
@@ -78,15 +79,19 @@ export default function MovieCard(props) {
           image={path.images + image}
           title={originalName}
           onClick={() => {
-            history.push(`/${type}/${id}`);
+            if (type === "movies") {
+              history.push(`${movieRoutes.path}/${id}`);
+              return;
+            }
+            if (type === "tv") {
+              history.push(`${tvRoutes.path}/${id}`);
+              return;
+            }
           }}
         />
         <CardContent className="movie-card__content">
           <div className="movie-card__vote-average">
-            <CircularProgressWithLabel 
-            value={voteAverage * 10} 
-            size={2.5}
-            />
+            <CircularProgressWithLabel value={voteAverage * 10} size={2.5} />
           </div>
           <Typography variant="subtitle2">{name}</Typography>
           <Typography>{firstAirDate}</Typography>

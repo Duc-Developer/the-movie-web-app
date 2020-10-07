@@ -14,15 +14,28 @@ import { useHistory } from "react-router-dom";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import NavMenuDesktop from "./NavMenuDesktop";
 import NavMenuMobile from "./NavMenuMobile";
+import { movieRoutes, tvRoutes } from "../../constants";
 
 const movieDropdown = {
   id: "movie-dropdown-id",
   name: "Movies",
   listItem: [
-    { name: "Popular", path: "/movies/popular" },
-    { name: "Now Playing", path: "/movies/now-playing" },
-    { name: "Upcoming", path: "/movies/upcoming" },
-    { name: "Top Rated", path: "/movies/top-rated" },
+    {
+      name: "Popular",
+      path: movieRoutes.path + movieRoutes.children.popular.path,
+    },
+    {
+      name: "Now Playing",
+      path: movieRoutes.path + movieRoutes.children.now_playing.path,
+    },
+    {
+      name: "Upcoming",
+      path: movieRoutes.path + movieRoutes.children.upcoming.path,
+    },
+    {
+      name: "Top Rated",
+      path: movieRoutes.path + movieRoutes.children.top_rated.path,
+    },
   ],
 };
 
@@ -30,10 +43,16 @@ const tvShowsDropdown = {
   id: "tv-dropdown-id",
   name: "TV Shows",
   listItem: [
-    { name: "Popular", path: "/tv/popular" },
-    { name: "Airing Today", path: "/tv/airing-today" },
-    { name: "On TV", path: "/tv/on-tv" },
-    { name: "Top Rated", path: "/tv/top-rated" },
+    { name: "Popular", path: tvRoutes.path + tvRoutes.children.popular.path },
+    {
+      name: "Airing Today",
+      path: tvRoutes.path + tvRoutes.children.airing_today.path,
+    },
+    { name: "On TV", path: tvRoutes.path + tvRoutes.children.on_tv.path },
+    {
+      name: "Top Rated",
+      path: tvRoutes.path + tvRoutes.children.top_rated.path,
+    },
   ],
 };
 
@@ -108,19 +127,17 @@ export default function NavBarHeader(props) {
                 />
               </div>
               <div className="navbar-header__menu--mobile-screen">
-                <NavMenuMobile 
-                menuList={[
-                  movieDropdown,
-                  tvShowsDropdown,
-                  peopleDropdown,
-                  moreDropdown,
-                ]}
+                <NavMenuMobile
+                  menuList={[
+                    movieDropdown,
+                    tvShowsDropdown,
+                    peopleDropdown,
+                    moreDropdown,
+                  ]}
                 />
               </div>
               <div>
-                <Typography>
-                  Login
-                </Typography>
+                <Typography>Login</Typography>
               </div>
             </Toolbar>
           </AppBar>

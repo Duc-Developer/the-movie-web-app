@@ -6,6 +6,9 @@ import TopRatedPage from "./pages/TopRatedPage";
 import PopularPage from "./pages/PopularPage";
 import OnTvPage from "./pages/OnTvPage";
 import TvPreview from "./pages/TvPreview";
+import { tvRoutes } from "../../constants";
+
+const { popular, airing_today, on_tv, top_rated } = tvRoutes.children;
 
 export default function TvShows() {
   return (
@@ -13,21 +16,21 @@ export default function TvShows() {
       <Container>
         <h1>TV SHOWS</h1>
         <Switch>
-          <Route exact path="/tv/popular">
+          <Route exact path={tvRoutes.path + popular.path}>
             <PopularPage />
           </Route>
-          <Route exact path="/tv/airing-today">
+          <Route exact path={tvRoutes.path + airing_today.path}>
             <AiringTodayPage />
           </Route>
-          <Route exact path="/tv/top-rated">
+          <Route exact path={tvRoutes.path + top_rated.path}>
             <TopRatedPage />
           </Route>
-          <Route exact path="/tv/on-tv">
+          <Route exact path={tvRoutes.path + on_tv.path}>
             <OnTvPage />
           </Route>
-          <Route exact path="/tv/:id">
+          <Route exact path={`${tvRoutes.path}/:id`}>
             <TvPreview />
-            </Route>
+          </Route>
         </Switch>
       </Container>
     </div>

@@ -10,12 +10,14 @@ import NotFound from './components/NotFound';
 import Loading from './components/Loading';
 import HomePage from './features/HomePage';
 import Footer from './components/Footer';
+import { movieRoutes, tvRoutes, peopleRoutes } from './constants';
 
 const Movies = React.lazy(() => import("./features/Movies"));
 const TvShows = React.lazy(() => import("./features/TvShows"));
 const Peoples = React.lazy(() => import("./features/Peoples"));
 
 function App() {
+  
   return (
     <div className="App">
       <Suspense fallback={<Loading />}>
@@ -26,9 +28,9 @@ function App() {
             <Route exact path="/">
               <HomePage />
             </Route>
-            <Route path="/movies" component={Movies}/>
-            <Route path="/tv" component={TvShows}/>
-            <Route path="/peoples" component={Peoples}/>
+            <Route path={movieRoutes.path} component={Movies}/>
+            <Route path={tvRoutes.path} component={TvShows}/>
+            <Route path={peopleRoutes.path} component={Peoples}/>
   
             <Route>
               <NotFound />
