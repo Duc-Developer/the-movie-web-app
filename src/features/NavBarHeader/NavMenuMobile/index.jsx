@@ -25,6 +25,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import logo from "../../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import { userRoutes } from "../../../constants";
 
 NavMenuMobile.propTypes = {
   menuList: PropTypes.array,
@@ -134,8 +135,8 @@ export default function NavMenuMobile(props) {
                 <ListItem
                   onClick={() => {
                     openDropdown === menu.id
-                    ? setOpenDropdown(false)
-                    : setOpenDropdown(menu.id);
+                      ? setOpenDropdown(false)
+                      : setOpenDropdown(menu.id);
                   }}
                   button
                 >
@@ -172,13 +173,25 @@ export default function NavMenuMobile(props) {
         </List>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem
+            button
+            onClick={() => {
+              history.push(userRoutes.path + userRoutes.children.login.path);
+              setOpen(false);
+            }}
+          >
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Login" />
           </ListItem>
-          <ListItem button>
+          <ListItem
+            button
+            onClick={() => {
+              history.push(userRoutes.path + userRoutes.children.register.path);
+              setOpen(false);
+            }}
+          >
             <ListItemIcon>
               <PersonAddIcon />
             </ListItemIcon>

@@ -51,7 +51,7 @@ export default function RegisterPage() {
             />
           </Grid>
           <Grid container justify="center" item xs={12}>
-            <Typography variant="h5">COME AND JOIN WITH US</Typography>
+            <Typography variant="h5">REGISTER</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <TextFieldController
