@@ -5,6 +5,8 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useForm } from "react-hook-form";
 import { Avatar, ButtonBase, Grid, Input, Typography } from "@material-ui/core";
 import userLogo from "../../../../assets/images/avatar.svg";
+import { useDispatch } from 'react-redux';
+import { createNewUser } from "../../../../actions";
 
 const defaultValues = {
   username: "",
@@ -22,6 +24,7 @@ export default function RegisterPage() {
   const [fileValue, setFileValue] = useState(null);
   const [preview, setPreview] = useState(userLogo);
   const [fileErrorMessage, setFileErrorMessage] = useState(null);
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     if (fileValue === null) {
@@ -32,7 +35,7 @@ export default function RegisterPage() {
       setFileErrorMessage("Avatar must be .jpeg file!");
       return;
     }
-    console.log("create success");
+    dispatch(createNewUser(data));
   };
 
   return (
