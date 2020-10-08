@@ -19,11 +19,20 @@ export default function RegisterPage() {
     defaultValues,
   });
   const inputRef = useRef(null);
-  const [fileValue, setFileValue] = useState({});
+  const [fileValue, setFileValue] = useState(null);
   const [preview, setPreview] = useState(userLogo);
+  const [fileErrorMessage, setFileErrorMessage] = useState(null);
 
   const onSubmit = (data) => {
-    console.log(fileValue);
+    if (fileValue === null) {
+      setFileErrorMessage("Avatar must be update!");
+      return;
+    }
+    if (fileValue?.type !== "image/jpeg") {
+      setFileErrorMessage("Avatar must be .jpeg file!");
+      return;
+    }
+    console.log("create success");
   };
 
   return (
@@ -43,12 +52,19 @@ export default function RegisterPage() {
               name="avatar"
               ref={inputRef}
               onChange={(e) => {
-                setFileValue(e.target.files[0]);
-                setPreview(URL.createObjectURL(e.target.files[0]));
+                if (e.target.files[0]) {
+                  setFileValue(e.target.files[0]);
+                  setPreview(URL.createObjectURL(e.target.files[0]));
+                }
               }}
               style={{ display: "none" }}
               type="file"
             />
+          </Grid>
+          <Grid container justify="center" item xs={12}>
+            <Typography color="error" variant="caption" component="i">
+              {fileErrorMessage}
+            </Typography>
           </Grid>
           <Grid container justify="center" item xs={12}>
             <Typography variant="h5">REGISTER</Typography>
