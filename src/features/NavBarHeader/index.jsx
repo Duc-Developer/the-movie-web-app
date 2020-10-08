@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Container,
@@ -14,12 +14,12 @@ import {
 import logo from "../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import ReorderIcon from "@material-ui/icons/Reorder";
 import NavMenuDesktop from "./NavMenuDesktop";
 import NavMenuMobile from "./NavMenuMobile";
 import { movieRoutes, tvRoutes } from "../../constants";
 import { userRoutes } from "../../constants";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { database } from "../../firebase";
 
 const movieDropdown = {
   id: "movie-dropdown-id",
@@ -97,16 +97,18 @@ HideOnScroll.propTypes = {
 export default function NavBarHeader(props) {
   const history = useHistory();
   const userId = sessionStorage.getItem("userId");
+  const [userCurrent, setUserCurrent] = useState(null);
 
-  const navBarMobile = () => {
-    return (
-      <div className="navbar-header__menu--mobile-screen">
-        <IconButton>
-          <ReorderIcon />
-        </IconButton>
-      </div>
-    );
-  };
+  useEffect(() => {
+    async function getData() {
+      let userData = await database
+        .ref("/users/" + userId)
+        .once("value")
+        .then((snap) => snap.val());
+      setUserCurrent(userData);
+    }
+    getData();
+  }, [userId, userCurrent]);
 
   return (
     <div className="navbar-header">
@@ -167,7 +169,10 @@ export default function NavBarHeader(props) {
                 ) : (
                   <div>
                     <ButtonBase>
-                      <Avatar src="#" alt={userId} />
+                      <Avatar
+                        src={userCurrent ? userCurrent.avatar : null}
+                        alt={userId}
+                      />
                     </ButtonBase>
                     <IconButton
                       color="inherit"
