@@ -5,7 +5,7 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useForm } from "react-hook-form";
 import { Avatar, ButtonBase, Grid, Input, Typography } from "@material-ui/core";
 import userLogo from "../../../../assets/images/avatar.svg";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { createNewUser } from "../../../../actions";
 
 const defaultValues = {
@@ -24,6 +24,7 @@ export default function RegisterPage() {
   const [fileValue, setFileValue] = useState(null);
   const [preview, setPreview] = useState(userLogo);
   const [fileErrorMessage, setFileErrorMessage] = useState(null);
+  const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
@@ -35,7 +36,12 @@ export default function RegisterPage() {
       setFileErrorMessage("Avatar must be .jpeg file!");
       return;
     }
-    dispatch(createNewUser(data));
+    dispatch(
+      createNewUser({
+        ...data,
+        avatar: fileValue,
+      })
+    );
   };
 
   return (
@@ -43,14 +49,16 @@ export default function RegisterPage() {
       <form onSubmit={handleSubmit(onSubmit)} className="register-page__form">
         <Grid container spacing={2}>
           <Grid container justify="center" item xs={12}>
-            <Avatar
-              style={{ width: "8em", height: "8em" }}
-              src={preview}
-              alt="user-logo-form"
-              onClick={() => {
-                inputRef.current.click();
-              }}
-            />
+            <div className="register-page__avatar">
+              <Avatar
+                src={preview}
+                alt="user-logo-form"
+                onClick={() => {
+                  inputRef.current.click();
+                }}
+              />
+            </div>
+
             <input
               name="avatar"
               ref={inputRef}
@@ -144,6 +152,11 @@ export default function RegisterPage() {
                 <Input fullWidth value="REGISTER" type="submit" />
               </ButtonBase>
             </div>
+          </Grid>
+          <Grid container justify="center" item xs={12}>
+            <Typography variant="subtitle1" color="error">
+              {authState.message}
+            </Typography>
           </Grid>
         </Grid>
       </form>

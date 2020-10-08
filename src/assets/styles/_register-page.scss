@@ -1,54 +1,67 @@
 .register-page {
+  background-image: $bg-img-primary;
+  padding-top: 5em;
+  padding-bottom: 5em;
+
+  .MuiGrid-item {
+    justify-content: center;
+  }
+
+  &__form {
+    margin: auto;
+    width: 480px;
+    background-color: #dddddd;
+    padding: 5% 5% 10% 30%;
+    align-items: center;
+    background-image: url("../images/494641-PHESOC-447.png"),
+      url("../images/wave.png");
+    background-position: left bottom, center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 360px, cover;
+    border-radius: 20px;
+  }
+
+  &__avatar {
+    .MuiAvatar-root {
+      width: 8em;
+      height: 8em;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.6;
+        transform: translateY(-5px);
+        transition: transform 0.2s linear;
+      }
+    }
+  }
+
+  &__login-button {
+    width: 100%;
+    .MuiButtonBase-root {
+      margin-top: 2em;
+      width: 100%;
+      background-color: $secondary-color;
+      border-radius: 5px 5px 0 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .register-page {
     background-image: $bg-img-primary;
     padding-top: 5em;
     padding-bottom: 5em;
 
-    .MuiGrid-item {
-        justify-content: center;
-    }
-
     &__form {
       margin: auto;
-      width: 480px;
-      background-color: #dddddd;
-      padding: 5% 5% 10% 30%;
+      width: 260px;
+      background-color: white;
+      padding: 5%;
       align-items: center;
-      background-image: url("../images/494641-PHESOC-447.png"), url("../images/wave.png");
-      background-position: left bottom, center;
-      background-repeat: no-repeat, no-repeat;
-      background-size: 360px, cover;
+      background-image: url("../images/wave.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
       border-radius: 20px;
     }
-  
-    &__login-button {
-      width: 100%;
-      .MuiButtonBase-root {
-        margin-top: 2em;
-        width: 100%;
-        background-color: $secondary-color;
-        border-radius: 5px 5px 0 0;
-      }
-    }
   }
-  
-  @media only screen and (max-width: 425px) {
-    .register-page {
-      background-image: $bg-img-primary;
-      padding-top: 5em;
-      padding-bottom: 5em;
-  
-      &__form {
-        margin: auto;
-        width: 260px;
-        background-color: white;
-        padding: 5%;
-        align-items: center;
-        background-image: url("../images/wave.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        border-radius: 20px;
-      }
-    }
-  }
-  
+}

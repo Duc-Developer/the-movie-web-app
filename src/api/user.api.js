@@ -1,13 +1,13 @@
 import { database, storage } from '../firebase';
 
-export function createNewUser(data) {
+export function createNewUserApi(data) {
     let newData = {};
     const newId = database.ref().child('users').push().key;
     newData['/users/' + newId] = data;
     return database.ref().update(newData);
 }
 
-export function uploadImage(file, catchUrl) {
+export function uploadImage(file) {
     const metadata = {
         contentType: 'image/jpeg'
     };
@@ -25,8 +25,17 @@ export function uploadImage(file, catchUrl) {
         // console.log("error", error)
     }
     function handleResponse() {
-        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-            catchUrl(downloadURL);
+        return uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+            return downloadURL
         });
     }
+    return handleResponse();
+}
+
+export function findQuery(ref, child, query, totalLimit) {
+    const events = database.ref(ref);
+    const match = events.orderByChild(child)
+                        .equalTo(query)
+                        .limitToFirst(totalLimit);
+    return match.once('value').then(snap => snap.val());
 }
