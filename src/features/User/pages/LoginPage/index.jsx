@@ -3,11 +3,12 @@ import TextFieldController from "../../../../fields/TextFieldController";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useForm } from "react-hook-form";
-import { Button, ButtonBase, Input, Typography } from "@material-ui/core";
+import { ButtonBase, Input, Typography } from "@material-ui/core";
 import userLogo from "../../../../assets/images/avatar.svg";
 
 const defaultValues = {
-  userName: "",
+  username: "",
+  password: ""
 };
 
 export default function LoginPage() {
