@@ -32,7 +32,7 @@ export default function RegisterPage() {
         <Grid container spacing={2}>
           <Grid container justify="center" item xs={12}>
             <Avatar
-              style={{width: "8em", height: "8em"}}
+              style={{ width: "8em", height: "8em" }}
               src={preview}
               alt="user-logo-form"
               onClick={() => {
