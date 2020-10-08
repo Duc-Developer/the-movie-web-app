@@ -3,6 +3,8 @@ import TextFieldController from "../../../../fields/TextFieldController";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useForm } from "react-hook-form";
+import { Button, ButtonBase, Input, Typography } from "@material-ui/core";
+import userLogo from "../../../../assets/images/avatar.svg";
 
 const defaultValues = {
   userName: "",
@@ -18,6 +20,8 @@ export default function LoginPage() {
   return (
     <div className="login-page">
       <form onSubmit={handleSubmit(onSubmit)} className="login-page__form">
+        <img width="120px" src={userLogo} alt="user-logo-form" />
+        <Typography variant="h5">WELCOME</Typography>
         <TextFieldController
           errors={errors}
           control={control}
@@ -29,10 +33,30 @@ export default function LoginPage() {
             },
           }}
           icon={<AccountCircle />}
-          name="userName"
+          name="username"
           type="text"
         />
-        <button type="submit">submit</button>
+        <TextFieldController
+          errors={errors}
+          control={control}
+          rules={{
+            required: { value: true, message: "Password is required" },
+            pattern: {
+              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+              message:
+                "Password is more than 8 characters and including numbers and letters",
+            },
+          }}
+          icon={<VpnKeyIcon />}
+          name="password"
+          type="password"
+          enableAdornment
+        />
+        <div className="login-page__login-button">
+          <ButtonBase>
+            <Input fullWidth value="LOGIN" type="submit" />
+          </ButtonBase>
+        </div>
       </form>
     </div>
   );
