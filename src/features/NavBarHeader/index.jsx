@@ -138,7 +138,7 @@ export default function NavBarHeader(props) {
                   ]}
                 />
               </div>
-              <div>
+              <div className="navbar-header__desktop-authecation">
                 <ButtonGroup variant="text" color="inherit">
                   <Button
                     onClick={() => {
