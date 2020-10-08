@@ -1,0 +1,15 @@
+.circular-progress-with-label {
+
+  .MuiCircularProgress-root {
+    background-color: $primary-color;
+    border-radius: 50%;
+  }
+
+  .MuiCircularProgress-colorPrimary {
+    color: rgb(66, 175, 66);
+  }
+
+  .MuiTypography-colorTextPrimary {
+    color: white;
+  }
+}

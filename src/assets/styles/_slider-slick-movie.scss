@@ -1,0 +1,43 @@
+.slider-slick-movie {
+  margin-left: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  &__header {
+    margin-bottom: 1em;
+  }
+
+  &__header-left {
+  }
+
+  &__header-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .slider-slick-movie {
+    margin-left: 0.2em;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .slider-slick-movie {
+
+    &__switcher {
+
+      .MuiButton-root {
+        font-size: 0.5em;
+      }
+    }
+
+    &__actions {
+
+      .MuiButton-root {
+        font-size: 0.5em;
+      }
+    }
+  }
+}

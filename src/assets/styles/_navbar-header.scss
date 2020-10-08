@@ -1,0 +1,41 @@
+.navbar-header {
+  .MuiAppBar-colorPrimary {
+    background-color: $primary-color;
+  }
+
+  &__logo {
+    img {
+      width: 7em;
+    }
+  }
+
+  &__menu--mobile-screen {
+    display: none;
+  }
+
+  &__menu--desktop-screen {
+    flex-grow: 1;
+  }
+  
+}
+
+@media only screen and (max-width: 767px) {
+  .navbar-header {
+    &__logo {
+      img {
+        display: none;
+      }
+    }
+
+    &__menu--desktop-screen {
+      display: none;
+    }
+
+    &__menu--mobile-screen {
+        display: block;
+      }
+    &__desktop-authecation {
+      display: none;
+    }
+  }
+}

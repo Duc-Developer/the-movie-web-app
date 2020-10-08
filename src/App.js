@@ -1,10 +1,49 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.scss';
+import NavBarHeader from './features/NavBarHeader';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import NotFound from './components/NotFound';
+import Loading from './components/Loading';
+import HomePage from './features/HomePage';
+import Footer from './components/Footer';
+import { movieRoutes, tvRoutes, peopleRoutes, userRoutes } from './constants';
+
+const Movies = React.lazy(() => import("./features/Movies"));
+const TvShows = React.lazy(() => import("./features/TvShows"));
+const Peoples = React.lazy(() => import("./features/Peoples"));
+const Search = React.lazy(() => import("./features/SearchPage"));
+const User = React.lazy(() => import("./features/User"));
 
 function App() {
+  
   return (
     <div className="App">
-      Hell i'm building the Movie Database app
+      <Suspense fallback={<Loading />}>
+        <Router>
+          <NavBarHeader />
+
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path={movieRoutes.path} component={Movies}/>
+            <Route path={tvRoutes.path} component={TvShows}/>
+            <Route path={peopleRoutes.path} component={Peoples}/>
+            <Route path={userRoutes.path} component={User} />
+            <Route path="/search" component={Search} />
+  
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+
+          <Footer />
+        </Router>
+      </Suspense>
     </div>
   );
 }

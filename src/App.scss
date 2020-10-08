@@ -1,6 +1,33 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css");
+
+
+@import "./assets/styles/variables";
+@import "./assets//styles/mixins";
+
+@import "./assets/styles/navbar-header";
+@import "./assets/styles/table-list";
+@import "./assets/styles/home-page";
+@import "./assets/styles/movie-card";
+@import "./assets/styles/slider-slick-movie";
+@import "./assets/styles/footer";
+@import "./assets/styles/nav-menu-desktop";
+@import "./assets/styles/people-card";
+@import "./assets/styles/person-information";
+@import "./assets/styles/person-story";
+@import "./assets/styles/movie-preview";
+@import "./assets/styles/movie-poster-library";
+@import "./assets/styles/circular-progress-with-label";
+@import "./assets/styles/header-poster-prev";
+@import "./assets/styles/person-simple-card";
+@import "./assets/styles/tv-preview";
+@import "./assets/styles/login-page";
+@import "./assets/styles/register-page";
 
 .App {
-
+    font-family: $roboto-font;
 }

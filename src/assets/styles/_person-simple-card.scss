@@ -1,0 +1,13 @@
+.person-simple-card {
+  .MuiCard-root {
+    border-radius: 10px;
+   }
+    &__wrapper {
+      }
+    
+      &__media {
+        height: 8em;
+        padding-top: 56.25%;
+        cursor: pointer;
+      }
+}

@@ -1,0 +1,19 @@
+.person-story {
+
+    &__biography {
+        .MuiButtonBase-root {
+            width: 100%;
+        }
+
+        &--text-hidden {
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+        };
+
+        &--text-show-all {
+            -webkit-line-clamp: none;
+        }
+    }
+}
