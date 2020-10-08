@@ -9,14 +9,14 @@ export function createNewUser(data) {
 
 export function createNewUserSuccess(response) {
     return {
-        type: type.CREATE_NEW_USER,
+        type: type.CREATE_NEW_USER_SUCCESS,
         payload: response
     }
 }
 
 export function createNewUserFailure(errors) {
     return {
-        type: type.CREATE_NEW_USER,
+        type: type.CREATE_NEW_USER_FAILURE,
         payload: errors
     }
 }
