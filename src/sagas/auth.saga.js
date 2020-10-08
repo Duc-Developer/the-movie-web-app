@@ -16,14 +16,15 @@ function* createNewUser(action) {
         yield put(createNewUserFailure("Server is down, please try again late!"));
         return;
     }
-    yield createNewUserApi({
+    let id = createNewUserApi({
         ...payload,
         avatar: imgUrl
     });
 
     yield put(createNewUserSuccess({
         ...payload,
-        avatar: imgUrl
+        avatar: imgUrl,
+        id: id
     }));
 }
 

@@ -9,7 +9,7 @@ function authReducer(state = initialState, action) {
     const {payload} = action;
     switch (action.type) {
         case type.CREATE_NEW_USER_SUCCESS:
-            sessionStorage.setItem("user", payload.username);
+            sessionStorage.setItem("userId", payload.id);
             return {
                 user: payload,
                 message: null,

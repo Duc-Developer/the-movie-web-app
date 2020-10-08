@@ -4,7 +4,8 @@ export function createNewUserApi(data) {
     let newData = {};
     const newId = database.ref().child('users').push().key;
     newData['/users/' + newId] = data;
-    return database.ref().update(newData);
+    database.ref().update(newData);
+    return newId;
 }
 
 export function uploadImage(file) {
