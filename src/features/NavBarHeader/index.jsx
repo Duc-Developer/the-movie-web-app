@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Container,
@@ -8,15 +8,20 @@ import {
   Slide,
   ButtonGroup,
   Button,
+  Avatar,
+  ButtonBase,
 } from "@material-ui/core";
 import logo from "../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import ReorderIcon from "@material-ui/icons/Reorder";
 import NavMenuDesktop from "./NavMenuDesktop";
 import NavMenuMobile from "./NavMenuMobile";
 import { movieRoutes, tvRoutes } from "../../constants";
 import { userRoutes } from "../../constants";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { database } from "../../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { userConstants as type } from "../../constants";
 
 const movieDropdown = {
   id: "movie-dropdown-id",
@@ -93,16 +98,21 @@ HideOnScroll.propTypes = {
 
 export default function NavBarHeader(props) {
   const history = useHistory();
+  const [userCurrent, setUserCurrent] = useState(null);
+  const id = useSelector((state) => state.auth.user?.id);
+  const dispatch = useDispatch();
 
-  const navBarMobile = () => {
-    return (
-      <div className="navbar-header__menu--mobile-screen">
-        <IconButton>
-          <ReorderIcon />
-        </IconButton>
-      </div>
-    );
-  };
+  useEffect(() => {
+    let userId = sessionStorage.getItem("userId");
+    async function getData() {
+      let userData = await database
+        .ref("/users/" + (id || userId))
+        .once("value")
+        .then((snap) => snap.val());
+      setUserCurrent(userData);
+    }
+    getData();
+  }, [userCurrent?.avatar, id]);
 
   return (
     <div className="navbar-header">
@@ -139,26 +149,46 @@ export default function NavBarHeader(props) {
                 />
               </div>
               <div className="navbar-header__desktop-authecation">
-                <ButtonGroup variant="text" color="inherit">
-                  <Button
-                    onClick={() => {
-                      history.push(
-                        userRoutes.path + userRoutes.children.login.path
-                      );
-                    }}
-                  >
-                    Login
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      history.push(
-                        userRoutes.path + userRoutes.children.register.path
-                      );
-                    }}
-                  >
-                    Register
-                  </Button>
-                </ButtonGroup>
+                {!userCurrent?.avatar ? (
+                  <ButtonGroup variant="text" color="inherit">
+                    <Button
+                      onClick={() => {
+                        history.push(
+                          userRoutes.path + userRoutes.children.login.path
+                        );
+                      }}
+                    >
+                      Login
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        history.push(
+                          userRoutes.path + userRoutes.children.register.path
+                        );
+                      }}
+                    >
+                      Register
+                    </Button>
+                  </ButtonGroup>
+                ) : (
+                  <div>
+                    <ButtonBase>
+                      <Avatar
+                        src={userCurrent ? userCurrent.avatar : null}
+                        alt={userCurrent.id}
+                      />
+                    </ButtonBase>
+                    <IconButton
+                      color="inherit"
+                      onClick={() => {
+                        sessionStorage.removeItem("userId");
+                        dispatch({ type: type.LOGOUT_REQUEST });
+                      }}
+                    >
+                      <ExitToAppIcon />
+                    </IconButton>
+                  </div>
+                )}
               </div>
             </Toolbar>
           </AppBar>

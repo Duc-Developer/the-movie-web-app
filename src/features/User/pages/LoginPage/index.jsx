@@ -5,24 +5,39 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useForm } from "react-hook-form";
 import { ButtonBase, Input, Typography } from "@material-ui/core";
 import userLogo from "../../../../assets/images/avatar.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest } from "../../../../actions/auth.actions";
+import { Redirect } from "react-router-dom";
 
 const defaultValues = {
   username: "",
-  password: ""
+  password: "",
 };
 
 export default function LoginPage() {
-  const { register, handleSubmit, errors, control } = useForm({
+  const { handleSubmit, errors, control } = useForm({
     defaultValues,
   });
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
+
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(loginRequest(data));
   };
+
   return (
     <div className="login-page">
+      {
+        authState.user && <Redirect to="/" />
+      }
       <form onSubmit={handleSubmit(onSubmit)} className="login-page__form">
         <img width="120px" src={userLogo} alt="user-logo-form" />
         <Typography variant="h5">WELCOME</Typography>
+        {authState.message && (
+          <Typography variant="subtitle1" color="error">
+            {authState.message}
+          </Typography>
+        )}
         <TextFieldController
           errors={errors}
           control={control}

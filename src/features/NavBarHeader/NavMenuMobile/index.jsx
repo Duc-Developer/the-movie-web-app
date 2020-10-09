@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -25,6 +25,11 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import logo from "../../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import { userRoutes } from "../../../constants";
+import { database } from "../../../firebase";
+import { Avatar } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { userConstants as type } from "../../../constants";
 
 NavMenuMobile.propTypes = {
   menuList: PropTypes.array,
@@ -68,6 +73,21 @@ export default function NavMenuMobile(props) {
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(false);
+  const [userCurrent, setUserCurrent] = React.useState(null);
+  const id = useSelector((state) => state.auth.user?.id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function getData() {
+      let userId = sessionStorage.getItem("userId");
+      let userData = await database
+        .ref("/users/" + (id || userId))
+        .once("value")
+        .then((snap) => snap.val());
+      setUserCurrent(userData);
+    }
+    getData();
+  }, [id, userCurrent?.avatar]);
 
   function chooseIconMenu(menuId) {
     switch (menuId) {
@@ -134,8 +154,8 @@ export default function NavMenuMobile(props) {
                 <ListItem
                   onClick={() => {
                     openDropdown === menu.id
-                    ? setOpenDropdown(false)
-                    : setOpenDropdown(menu.id);
+                      ? setOpenDropdown(false)
+                      : setOpenDropdown(menu.id);
                   }}
                   button
                 >
@@ -172,24 +192,58 @@ export default function NavMenuMobile(props) {
         </List>
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Login" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonAddIcon />
-            </ListItemIcon>
-            <ListItemText primary="Register" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary="Logout" />
-          </ListItem>
+          {!userCurrent && (
+            <ListItem
+              button
+              onClick={() => {
+                history.push(userRoutes.path + userRoutes.children.login.path);
+                setOpen(false);
+              }}
+            >
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Login" />
+            </ListItem>
+          )}
+          {!userCurrent && (
+            <ListItem
+              button
+              onClick={() => {
+                history.push(
+                  userRoutes.path + userRoutes.children.register.path
+                );
+                setOpen(false);
+              }}
+            >
+              <ListItemIcon>
+                <PersonAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Register" />
+            </ListItem>
+          )}
+          {userCurrent && (
+            <ListItem button>
+              <ListItemIcon>
+                <Avatar src={userCurrent.avatar} alt={userCurrent.avatar} />
+              </ListItemIcon>
+              <ListItemText primary={userCurrent.firstName} />
+            </ListItem>
+          )}
+          {userCurrent && (
+            <ListItem
+              button
+              onClick={() => {
+                sessionStorage.removeItem("userId");
+                dispatch({ type: type.LOGOUT_REQUEST });
+              }}
+            >
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItem>
+          )}
         </List>
       </Drawer>
     </div>
