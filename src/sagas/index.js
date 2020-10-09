@@ -1,8 +1,9 @@
 import {all} from 'redux-saga/effects';
-import { createNewUserAction } from './auth.saga';
+import { createNewUserAction, loginRequestAction } from './auth.saga';
 
 export default function* rootSaga() {
     yield all([
         createNewUserAction(),
+        loginRequestAction(),
     ])
 }

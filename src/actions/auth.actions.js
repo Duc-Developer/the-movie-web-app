@@ -20,3 +20,24 @@ export function createNewUserFailure(errors) {
         payload: errors
     }
 }
+
+export function loginRequest(data) {
+    return {
+        type: type.LOGIN_REQUEST,
+        payload: data
+    }
+}
+
+export function loginSuccess(response) {
+    return {
+        type: type.LOGIN_SUCCESS,
+        payload: response
+    }
+}
+
+export function loginFailure(errors) {
+    return {
+        type: type.LOGIN_FAILURE,
+        payload: errors
+    }
+}
