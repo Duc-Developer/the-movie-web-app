@@ -18,6 +18,8 @@ import StarIcon from "@material-ui/icons/Star";
 import CircularProgressWithLabel from "../CircularProgressWithLabel";
 import { movieRoutes, tvRoutes } from "../../constants";
 import posterDefault from "../../assets/images/no_poster.jpg";
+import { useDispatch } from "react-redux";
+import { addWishList } from "../../actions";
 
 MovieCard.propType = {
   type: PropTypes.oneOf(["tv", "movie"]),
@@ -53,6 +55,32 @@ export default function MovieCard(props) {
   } = props;
   const history = useHistory();
   const [active, setActive] = useState(false);
+  const dispatch = useDispatch();
+
+  function handleAddWishList() {
+    const data = {
+      id: id,
+      type: type,
+      image: image,
+      voteAverage: voteAverage,
+      name: name,
+      firstAirDate: firstAirDate,
+      originalName: originalName,
+    }
+    dispatch(addWishList(data));
+    setActive(false);
+  }
+
+  function handleAddWatchList() {
+    //do dispatch action to add watch list
+    setActive(false);
+  }
+
+  function handleRating() {
+    //do dispatch action to rate movie
+    setActive(false);
+  }
+
   return (
     <div className="movie-card">
       <Card
@@ -66,9 +94,6 @@ export default function MovieCard(props) {
           <IconButton
             onClick={() => {
               setActive(!active);
-            }}
-            onBlur={() => {
-              setActive(false);
             }}
             aria-label="settings"
           >
@@ -104,15 +129,15 @@ export default function MovieCard(props) {
             <ListIcon />
             <span> Add To List</span>
           </ButtonBase>
-          <ButtonBase>
+          <ButtonBase onClick={handleAddWishList}>
             <FavoriteIcon />
             <span> Favorite</span>
           </ButtonBase>
-          <ButtonBase className="movie-card__little-menu-base">
-            <BookmarkIcon />
+          <ButtonBase onClick={handleAddWatchList}>
+            <BookmarkIcon  />
             <span> Watchlist</span>
           </ButtonBase>
-          <ButtonBase>
+          <ButtonBase onClick={handleRating}>
             <StarIcon />
             <span> Your rating</span>
           </ButtonBase>

@@ -36,7 +36,17 @@ export function uploadImage(file) {
 export function findQuery(ref, child, query, totalLimit) {
     const events = database.ref(ref);
     const match = events.orderByChild(child)
-                        .equalTo(query)
-                        .limitToFirst(totalLimit);
+        .equalTo(query)
+        .limitToFirst(totalLimit);
     return match.once('value').then(snap => snap.val());
+}
+
+export function addWishListApi(userId, movieData) {
+    const movieId = movieData.id;
+    let postData = {
+        [movieId]: movieData
+    }
+    let updateTask = database
+        .ref("/users/" + userId + "/wishLists")
+        .update(postData)
 }
