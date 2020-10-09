@@ -96,10 +96,10 @@ HideOnScroll.propTypes = {
 
 export default function NavBarHeader(props) {
   const history = useHistory();
-  const userId = sessionStorage.getItem("userId");
   const [userCurrent, setUserCurrent] = useState(null);
 
   useEffect(() => {
+    const userId = sessionStorage.getItem("userId");
     async function getData() {
       let userData = await database
         .ref("/users/" + userId)
@@ -108,7 +108,7 @@ export default function NavBarHeader(props) {
       setUserCurrent(userData);
     }
     getData();
-  }, [userId, userCurrent]);
+  }, [userCurrent]);
 
   return (
     <div className="navbar-header">
@@ -145,7 +145,7 @@ export default function NavBarHeader(props) {
                 />
               </div>
               <div className="navbar-header__desktop-authecation">
-                {!userId ? (
+                {!userCurrent ? (
                   <ButtonGroup variant="text" color="inherit">
                     <Button
                       onClick={() => {
@@ -171,13 +171,13 @@ export default function NavBarHeader(props) {
                     <ButtonBase>
                       <Avatar
                         src={userCurrent ? userCurrent.avatar : null}
-                        alt={userId}
+                        alt={userCurrent.id}
                       />
                     </ButtonBase>
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        sessionStorage.removeItem("user");
+                        sessionStorage.removeItem("userId");
                       }}
                     >
                       <ExitToAppIcon />

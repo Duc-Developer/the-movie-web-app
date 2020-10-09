@@ -7,6 +7,7 @@ import { ButtonBase, Input, Typography } from "@material-ui/core";
 import userLogo from "../../../../assets/images/avatar.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest } from "../../../../actions/auth.actions";
+import { Redirect } from "react-router-dom";
 
 const defaultValues = {
   username: "",
@@ -26,6 +27,9 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
+      {
+        authState.user && <Redirect to="/" />
+      }
       <form onSubmit={handleSubmit(onSubmit)} className="login-page__form">
         <img width="120px" src={userLogo} alt="user-logo-form" />
         <Typography variant="h5">WELCOME</Typography>
