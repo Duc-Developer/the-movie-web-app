@@ -47,6 +47,6 @@ export function addWishListApi(userId, movieData) {
         [movieId]: movieData
     }
     let updateTask = database
-        .ref("/users/" + userId + "/wishLists")
+        .ref("/users/" + userId + "/wishList")
         .update(postData)
 }
