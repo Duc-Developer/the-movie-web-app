@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { userRoutes } from '../../constants';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import WishListPage from './pages/WishListPage';
 
 const { login, register, wish_list } = userRoutes.children;
 
@@ -17,7 +18,7 @@ export default function User() {
                     <RegisterPage />
                 </Route>
                 <Route exact path={userRoutes.path + wish_list.path}>
-                    <div>wish_list</div>
+                    <WishListPage />
                 </Route>
             </Switch>
         </div>
