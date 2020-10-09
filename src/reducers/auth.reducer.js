@@ -31,6 +31,11 @@ function authReducer(state = initialState, action) {
                 user: null,
                 message: payload
             }
+        case type.LOGOUT_REQUEST:
+            return {
+                user: null,
+                message: null
+            }
         default:
             return state;
     }

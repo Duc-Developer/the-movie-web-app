@@ -20,6 +20,8 @@ import { movieRoutes, tvRoutes } from "../../constants";
 import { userRoutes } from "../../constants";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { database } from "../../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { userConstants as type } from "../../constants";
 
 const movieDropdown = {
   id: "movie-dropdown-id",
@@ -97,18 +99,20 @@ HideOnScroll.propTypes = {
 export default function NavBarHeader(props) {
   const history = useHistory();
   const [userCurrent, setUserCurrent] = useState(null);
+  const id = useSelector((state) => state.auth.user?.id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const userId = sessionStorage.getItem("userId");
+    let userId = sessionStorage.getItem("userId");
     async function getData() {
       let userData = await database
-        .ref("/users/" + userId)
+        .ref("/users/" + (id || userId))
         .once("value")
         .then((snap) => snap.val());
       setUserCurrent(userData);
     }
     getData();
-  }, [userCurrent]);
+  }, [userCurrent?.avatar, id]);
 
   return (
     <div className="navbar-header">
@@ -145,7 +149,7 @@ export default function NavBarHeader(props) {
                 />
               </div>
               <div className="navbar-header__desktop-authecation">
-                {!userCurrent ? (
+                {!userCurrent?.avatar ? (
                   <ButtonGroup variant="text" color="inherit">
                     <Button
                       onClick={() => {
@@ -178,6 +182,7 @@ export default function NavBarHeader(props) {
                       color="inherit"
                       onClick={() => {
                         sessionStorage.removeItem("userId");
+                        dispatch({ type: type.LOGOUT_REQUEST });
                       }}
                     >
                       <ExitToAppIcon />

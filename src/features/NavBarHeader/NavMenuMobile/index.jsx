@@ -28,6 +28,8 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import { userRoutes } from "../../../constants";
 import { database } from "../../../firebase";
 import { Avatar } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { userConstants as type } from "../../../constants";
 
 NavMenuMobile.propTypes = {
   menuList: PropTypes.array,
@@ -71,19 +73,21 @@ export default function NavMenuMobile(props) {
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(false);
-  const userId = sessionStorage.getItem("userId");
   const [userCurrent, setUserCurrent] = React.useState(null);
+  const id = useSelector((state) => state.auth.user?.id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getData() {
+      let userId = sessionStorage.getItem("userId");
       let userData = await database
-        .ref("/users/" + userId)
+        .ref("/users/" + (id || userId))
         .once("value")
         .then((snap) => snap.val());
       setUserCurrent(userData);
     }
     getData();
-  }, [userId, userCurrent]);
+  }, [id, userCurrent?.avatar]);
 
   function chooseIconMenu(menuId) {
     switch (menuId) {
@@ -221,7 +225,7 @@ export default function NavMenuMobile(props) {
           {userCurrent && (
             <ListItem button>
               <ListItemIcon>
-                <Avatar src={userCurrent.avatar} alt={userId} />
+                <Avatar src={userCurrent.avatar} alt={userCurrent.avatar} />
               </ListItemIcon>
               <ListItemText primary={userCurrent.firstName} />
             </ListItem>
@@ -231,6 +235,7 @@ export default function NavMenuMobile(props) {
               button
               onClick={() => {
                 sessionStorage.removeItem("userId");
+                dispatch({ type: type.LOGOUT_REQUEST });
               }}
             >
               <ListItemIcon>
