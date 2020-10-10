@@ -23,6 +23,7 @@ import { useHistory } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import logo from "../../../assets/images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { userRoutes } from "../../../constants";
@@ -72,6 +73,7 @@ export default function NavMenuMobile(props) {
   const { menuList } = props;
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
+  const [showCollapse, setShowCollapse] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(false);
   const [userCurrent, setUserCurrent] = React.useState(null);
   const id = useSelector((state) => state.auth.user?.id);
@@ -223,12 +225,38 @@ export default function NavMenuMobile(props) {
             </ListItem>
           )}
           {userCurrent && (
-            <ListItem button>
-              <ListItemIcon>
-                <Avatar src={userCurrent.avatar} alt={userCurrent.avatar} />
-              </ListItemIcon>
-              <ListItemText primary={userCurrent.firstName} />
-            </ListItem>
+            <>
+              <ListItem
+                button
+                onClick={() => {
+                  setShowCollapse(!showCollapse);
+                }}
+              >
+                <ListItemIcon>
+                  <Avatar src={userCurrent.avatar} alt={userCurrent.avatar} />
+                </ListItemIcon>
+                <ListItemText primary={userCurrent.firstName} />
+                {showCollapse ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={showCollapse} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItem
+                    button
+                    onClick={() => {
+                      history.push(
+                        userRoutes.path + userRoutes.children.wish_list.path
+                      );
+                      setOpen(false);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <FavoriteBorderIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Whistlist" />
+                  </ListItem>
+                </List>
+              </Collapse>
+            </>
           )}
           {userCurrent && (
             <ListItem

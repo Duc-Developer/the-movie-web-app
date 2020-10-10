@@ -22,6 +22,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { database } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { userConstants as type } from "../../constants";
+import AvatarNavBar from "./AvatarNavBar";
 
 const movieDropdown = {
   id: "movie-dropdown-id",
@@ -172,12 +173,19 @@ export default function NavBarHeader(props) {
                   </ButtonGroup>
                 ) : (
                   <div>
-                    <ButtonBase>
+                    {/* <ButtonBase>
                       <Avatar
                         src={userCurrent ? userCurrent.avatar : null}
                         alt={userCurrent.id}
                       />
-                    </ButtonBase>
+                    </ButtonBase> */}
+                    <AvatarNavBar
+                    src={userCurrent ? userCurrent.avatar : null}
+                    alt={userCurrent.id}
+                    menuList={[
+                      {name: "wishlist", path: "/user/wishlist"}
+                    ]}
+                    />
                     <IconButton
                       color="inherit"
                       onClick={() => {

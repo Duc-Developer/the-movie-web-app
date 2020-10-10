@@ -40,7 +40,7 @@ export default function WishListPage() {
           ) : (
             wishlist.map((movie) => {
               return (
-                <Grid key={movie.id} item xs={3}>
+                <Grid key={movie.id} item xs={12} sm={3}>
                   <MovieCard
                     id={movie.id}
                     type={movie.type}
